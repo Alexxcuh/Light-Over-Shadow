@@ -1,0 +1,513 @@
+[gd_scene load_steps=24 format=3 uid="uid://8kqg02okervf"]
+
+[ext_resource type="Script" uid="uid://dg7ffju6qkcvm" path="res://assets/scripts/rotatee.cs" id="1_8omcj"]
+[ext_resource type="Texture2D" uid="uid://hws5wgw8ftdm" path="res://assets/visuals/sphere.png" id="1_c4qlh"]
+[ext_resource type="Script" uid="uid://vatlrqmvksv" path="res://assets/scripts/MainMenuButtons.cs" id="1_xuqax"]
+[ext_resource type="Theme" uid="uid://ba5dhns3igvhd" path="res://assets/visuals/Theme.tres" id="2_0wlwb"]
+[ext_resource type="Script" uid="uid://bplwvvekxxg0x" path="res://assets/scripts/LevelButton.cs" id="2_8aat6"]
+[ext_resource type="PackedScene" uid="uid://ceajwtm8n48dt" path="res://assets/scenes/Levels/tutorial.tscn" id="3_ugn2o"]
+[ext_resource type="FontFile" uid="uid://dy3e6rotqbl3n" path="res://assets/fonts/ArchivoBlack.ttf" id="4_c4qlh"]
+[ext_resource type="PackedScene" uid="uid://cuwctu8iu8bjk" path="res://assets/scenes/Levels/Level1.tscn" id="5_q8r6g"]
+[ext_resource type="Texture2D" uid="uid://dfpeqsiy2wyfi" path="res://assets/visuals/Level.png" id="7_c4qlh"]
+[ext_resource type="PackedScene" uid="uid://bhefxxv44qhd7" path="res://assets/scenes/Levels/Level2.tscn" id="9_0ujva"]
+[ext_resource type="PackedScene" uid="uid://cthtdtmecdybc" path="res://assets/scenes/Controls.tscn" id="9_ujvk5"]
+[ext_resource type="PackedScene" uid="uid://n5b62mpbo317" path="res://assets/scenes/Levels/Level3.tscn" id="10_4jp7k"]
+[ext_resource type="PackedScene" uid="uid://dh1u3xsxd8127" path="res://assets/scenes/Levels/Level4.tscn" id="11_nf3ne"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_0wlwb"]
+flip_faces = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c4qlh"]
+transparency = 1
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_texture = ExtResource("1_c4qlh")
+
+[sub_resource type="Gradient" id="Gradient_0gfpk"]
+offsets = PackedFloat32Array(0.5, 1)
+colors = PackedColorArray(0, 0, 0, 0.49803922, 0, 0, 0, 0.6666667)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0hrit"]
+gradient = SubResource("Gradient_0gfpk")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c4qlh"]
+texture = SubResource("GradientTexture2D_0hrit")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c4qlh"]
+bg_color = Color(0, 0, 0, 0.2)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u7y45"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_8aat6"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_8omcj"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_xuqax"]
+font_color = Color(1, 1, 1, 0.31764707)
+
+[node name="Menu" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+handle_input_locally = false
+scaling_3d_scale = 0.25
+texture_mipmap_bias = -2.0
+anisotropic_filtering_level = 0
+fsr_sharpness = 0.0
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 4.15097, 0.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(0.9848078, -0.17364818, 0, 0.17101008, 0.96984637, -0.17364818, 0.03015369, 0.17101008, 0.9848078, 0, 0, 0)
+mesh = SubResource("SphereMesh_0wlwb")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_c4qlh")
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.15097, 0.5)
+fov = 90.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_0wlwb")
+theme_override_styles/panel = SubResource("StyleBoxTexture_c4qlh")
+
+[node name="MainMenu" type="Control" parent="CanvasLayer/Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel/MainMenu" node_paths=PackedStringArray("MainMenu", "Levels", "contr")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.49400002
+anchor_right = 0.5
+anchor_bottom = 0.49400002
+offset_left = -152.0
+offset_top = 3.8880005
+offset_right = 152.0
+offset_bottom = 327.888
+script = ExtResource("1_xuqax")
+MainMenu = NodePath("..")
+Levels = NodePath("../../Levels")
+contr = NodePath("../../Controls")
+
+[node name="Play" type="Button" parent="CanvasLayer/Panel/MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Play"
+
+[node name="Controls" type="Button" parent="CanvasLayer/Panel/MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Controls"
+
+[node name="Quit" type="Button" parent="CanvasLayer/Panel/MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Quit"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/Panel/MainMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.494
+anchor_right = 0.5
+anchor_bottom = 0.494
+offset_left = -320.0
+offset_top = -312.016
+offset_right = 320.0
+offset_bottom = -8.015991
+mouse_filter = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/Panel/MainMenu/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+scaling_3d_scale = 0.4
+texture_mipmap_bias = -2.0
+anisotropic_filtering_level = 0
+fsr_sharpness = 0.0
+gui_snap_controls_to_pixels = false
+sdf_oversize = 0
+sdf_scale = 2
+positional_shadow_atlas_size = 0
+positional_shadow_atlas_16_bits = false
+size = Vector2i(640, 304)
+render_target_update_mode = 0
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/Panel/MainMenu/SubViewportContainer/SubViewport"]
+fov = 67.0
+size = 1.916
+
+[node name="Label3D" type="Label3D" parent="CanvasLayer/Panel/MainMenu/SubViewportContainer/SubViewport/Camera3D" node_paths=PackedStringArray("panorama")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.3)
+transparency = 0.15
+double_sided = false
+no_depth_test = true
+outline_modulate = Color(0.497474, 0.497474, 0.497474, 1)
+text = "Light over Shadow"
+font = ExtResource("4_c4qlh")
+outline_size = 25
+script = ExtResource("1_8omcj")
+panorama = NodePath("../../../../../../SubViewportContainer/SubViewport/Camera3D")
+
+[node name="Label3D" type="Label3D" parent="CanvasLayer/Panel/MainMenu/SubViewportContainer/SubViewport/Camera3D/Label3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transparency = 0.15
+double_sided = false
+no_depth_test = true
+outline_modulate = Color(0.498039, 0.498039, 0.498039, 1)
+text = "Solo Dev GameJam"
+font = ExtResource("4_c4qlh")
+outline_size = 25
+
+[node name="Levels" type="Control" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Panel/Levels"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.98800004
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = -16.223999
+theme_override_styles/panel = SubResource("StyleBoxFlat_c4qlh")
+
+[node name="NewContainer" type="FlowContainer" parent="CanvasLayer/Panel/Levels"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 68.0
+offset_top = 68.0
+offset_right = -68.0
+offset_bottom = -28.0
+alignment = 1
+
+[node name="Level" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer" node_paths=PackedStringArray("Icon", "_Name", "Play")]
+custom_minimum_size = Vector2(300, 250)
+layout_mode = 2
+script = ExtResource("2_8aat6")
+Icon = NodePath("Mask/Icon")
+_Name = NodePath("LevelName")
+Play = NodePath("Play")
+AssociatedLevel = ExtResource("3_ugn2o")
+LevelName = "Basics"
+
+[node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level"]
+clip_children = 1
+clip_contents = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 290.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u7y45")
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Panel/Levels/NewContainer/Level/Mask"]
+layout_mode = 0
+offset_right = 280.0
+offset_bottom = 140.0
+texture = ExtResource("7_c4qlh")
+
+[node name="LevelName" type="Label" parent="CanvasLayer/Panel/Levels/NewContainer/Level"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.9850001
+offset_top = 157.0
+offset_bottom = -65.250015
+text = "Level Name"
+label_settings = SubResource("LabelSettings_8aat6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer/Panel/Levels/NewContainer/Level"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 200.0
+offset_right = 290.0
+offset_bottom = 241.17647
+text = "Play"
+
+[node name="Level2" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer" node_paths=PackedStringArray("Icon", "_Name", "Play")]
+custom_minimum_size = Vector2(300, 250)
+layout_mode = 2
+script = ExtResource("2_8aat6")
+Icon = NodePath("Mask/Icon")
+_Name = NodePath("LevelName")
+Play = NodePath("Play")
+AssociatedLevel = ExtResource("5_q8r6g")
+LevelName = "Jumping"
+
+[node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level2"]
+clip_children = 1
+clip_contents = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 290.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u7y45")
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Panel/Levels/NewContainer/Level2/Mask"]
+layout_mode = 0
+offset_right = 280.0
+offset_bottom = 140.0
+texture = ExtResource("7_c4qlh")
+
+[node name="LevelName" type="Label" parent="CanvasLayer/Panel/Levels/NewContainer/Level2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.9850001
+offset_top = 157.0
+offset_bottom = -65.250015
+text = "Level Name"
+label_settings = SubResource("LabelSettings_8aat6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer/Panel/Levels/NewContainer/Level2"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 200.0
+offset_right = 290.0
+offset_bottom = 241.17647
+text = "Play"
+
+[node name="Level3" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer" node_paths=PackedStringArray("Icon", "_Name", "Play")]
+custom_minimum_size = Vector2(300, 250)
+layout_mode = 2
+script = ExtResource("2_8aat6")
+Icon = NodePath("Mask/Icon")
+_Name = NodePath("LevelName")
+Play = NodePath("Play")
+AssociatedLevel = ExtResource("9_0ujva")
+LevelName = "The Button"
+
+[node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level3"]
+clip_children = 1
+clip_contents = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 290.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u7y45")
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Panel/Levels/NewContainer/Level3/Mask"]
+layout_mode = 0
+offset_right = 280.0
+offset_bottom = 140.0
+texture = ExtResource("7_c4qlh")
+
+[node name="LevelName" type="Label" parent="CanvasLayer/Panel/Levels/NewContainer/Level3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.9850001
+offset_top = 157.0
+offset_bottom = -65.250015
+text = "Level Name"
+label_settings = SubResource("LabelSettings_8aat6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer/Panel/Levels/NewContainer/Level3"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 200.0
+offset_right = 290.0
+offset_bottom = 241.17647
+text = "Play"
+
+[node name="Level4" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer" node_paths=PackedStringArray("Icon", "_Name", "Play")]
+custom_minimum_size = Vector2(300, 250)
+layout_mode = 2
+script = ExtResource("2_8aat6")
+Icon = NodePath("Mask/Icon")
+_Name = NodePath("LevelName")
+Play = NodePath("Play")
+AssociatedLevel = ExtResource("10_4jp7k")
+LevelName = "Time Flies By"
+
+[node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level4"]
+clip_children = 1
+clip_contents = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 290.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u7y45")
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Panel/Levels/NewContainer/Level4/Mask"]
+layout_mode = 0
+offset_right = 280.0
+offset_bottom = 140.0
+texture = ExtResource("7_c4qlh")
+
+[node name="LevelName" type="Label" parent="CanvasLayer/Panel/Levels/NewContainer/Level4"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.9850001
+offset_top = 157.0
+offset_bottom = -65.250015
+text = "Level Name"
+label_settings = SubResource("LabelSettings_8aat6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer/Panel/Levels/NewContainer/Level4"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 200.0
+offset_right = 290.0
+offset_bottom = 241.17647
+text = "Play"
+
+[node name="Level5" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer" node_paths=PackedStringArray("Icon", "_Name", "Play")]
+custom_minimum_size = Vector2(300, 250)
+layout_mode = 2
+script = ExtResource("2_8aat6")
+Icon = NodePath("Mask/Icon")
+_Name = NodePath("LevelName")
+Play = NodePath("Play")
+AssociatedLevel = ExtResource("11_nf3ne")
+LevelName = "Many Tabs Later"
+
+[node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level5"]
+clip_children = 1
+clip_contents = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 290.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u7y45")
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Panel/Levels/NewContainer/Level5/Mask"]
+layout_mode = 0
+offset_right = 280.0
+offset_bottom = 140.0
+texture = ExtResource("7_c4qlh")
+
+[node name="LevelName" type="Label" parent="CanvasLayer/Panel/Levels/NewContainer/Level5"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.9850001
+offset_top = 157.0
+offset_bottom = -65.250015
+text = "Level Name"
+label_settings = SubResource("LabelSettings_8aat6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer/Panel/Levels/NewContainer/Level5"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 200.0
+offset_right = 290.0
+offset_bottom = 241.17647
+text = "Play"
+
+[node name="Title" type="Label" parent="CanvasLayer/Panel/Levels"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 64.0
+text = "Levels"
+label_settings = SubResource("LabelSettings_8omcj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Controls" parent="CanvasLayer/Panel" instance=ExtResource("9_ujvk5")]
+layout_mode = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.998
+anchor_bottom = 0.998
+offset_left = 8.0
+offset_top = -22.70404
+offset_right = 456.0
+offset_bottom = 0.29595947
+text = "Made by alexx0bro(AlexXD_)"
+label_settings = SubResource("LabelSettings_xuqax")
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.998
+anchor_right = 1.0
+anchor_bottom = 0.998
+offset_left = -456.0
+offset_top = -22.70404
+offset_right = -8.0
+offset_bottom = 0.29595947
+text = "Made For the SoloDevelopment 72-hour Jam #9"
+label_settings = SubResource("LabelSettings_xuqax")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/Panel/MainMenu/VBoxContainer/Play" to="CanvasLayer/Panel/MainMenu/VBoxContainer" method="LevelMenu"]
+[connection signal="pressed" from="CanvasLayer/Panel/MainMenu/VBoxContainer/Controls" to="CanvasLayer/Panel/MainMenu/VBoxContainer" method="Controls"]
+[connection signal="pressed" from="CanvasLayer/Panel/MainMenu/VBoxContainer/Quit" to="CanvasLayer/Panel/MainMenu/VBoxContainer" method="Quit"]
+[connection signal="pressed" from="CanvasLayer/Panel/Levels/NewContainer/Level/Play" to="CanvasLayer/Panel/Levels/NewContainer/Level" method="pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/Levels/NewContainer/Level2/Play" to="CanvasLayer/Panel/Levels/NewContainer/Level2" method="pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/Levels/NewContainer/Level3/Play" to="CanvasLayer/Panel/Levels/NewContainer/Level3" method="pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/Levels/NewContainer/Level4/Play" to="CanvasLayer/Panel/Levels/NewContainer/Level4" method="pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/Levels/NewContainer/Level5/Play" to="CanvasLayer/Panel/Levels/NewContainer/Level5" method="pressed"]

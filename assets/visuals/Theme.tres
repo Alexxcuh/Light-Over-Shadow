@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://ba5dhns3igvhd"]
+
+[ext_resource type="FontFile" uid="uid://dy3e6rotqbl3n" path="res://assets/fonts/ArchivoBlack.ttf" id="1_x3lnf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x3lnf"]
+bg_color = Color(0, 0, 0, 0.6666667)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x3lnf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1egkx"]
+bg_color = Color(0.15247649, 0.15247649, 0.15247646, 0.6666667)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[resource]
+default_font = ExtResource("1_x3lnf")
+Button/styles/disabled = SubResource("StyleBoxFlat_x3lnf")
+Button/styles/focus = SubResource("StyleBoxEmpty_x3lnf")
+Button/styles/hover = SubResource("StyleBoxFlat_x3lnf")
+Button/styles/normal = SubResource("StyleBoxFlat_x3lnf")
+Button/styles/pressed = SubResource("StyleBoxFlat_1egkx")
+Panel/styles/panel = SubResource("StyleBoxFlat_x3lnf")

@@ -1,0 +1,272 @@
+[gd_scene load_steps=37 format=3 uid="uid://bhefxxv44qhd7"]
+
+[ext_resource type="Script" uid="uid://bn8qgxne4de7t" path="res://assets/scripts/Door.cs" id="1_3ti0f"]
+[ext_resource type="Script" uid="uid://clw5yfm1yhaqx" path="res://assets/scripts/Finish.cs" id="1_mfnpu"]
+[ext_resource type="Shader" uid="uid://dwgqqebpe751h" path="res://assets/visuals/scroll.gdshader" id="2_dcxel"]
+[ext_resource type="PackedScene" uid="uid://hw2a4fa17vxc" path="res://assets/scenes/player.tscn" id="2_wejjs"]
+[ext_resource type="Texture2D" uid="uid://c2jnb66iy1uh2" path="res://assets/visuals/ff.png" id="3_45xgo"]
+[ext_resource type="Script" uid="uid://4l82yuwlemm5" path="res://assets/scripts/LightPlatform.cs" id="3_rrsvi"]
+[ext_resource type="AudioStream" uid="uid://cemwbfsjlkkud" path="res://assets/visuals/place.wav" id="4_3ti0f"]
+[ext_resource type="AudioStream" uid="uid://qcbd1lphrsij" path="res://assets/visuals/doorenabled.wav" id="4_ipe1n"]
+[ext_resource type="AudioStream" uid="uid://cmyrtoej80hwr" path="res://assets/visuals/doordisabled.wav" id="5_b1clc"]
+[ext_resource type="AudioStream" uid="uid://dk4gld3l402xh" path="res://assets/visuals/dissapear.wav" id="5_k71xi"]
+[ext_resource type="Script" uid="uid://c6n844bsdotfr" path="res://assets/scripts/Button3D.cs" id="6_wejjs"]
+[ext_resource type="PackedScene" uid="uid://n5b62mpbo317" path="res://assets/scenes/Levels/Level3.tscn" id="6_wuld0"]
+[ext_resource type="AudioStream" uid="uid://cxhclnldbgcit" path="res://assets/visuals/click.wav" id="7_rrsvi"]
+[ext_resource type="FontFile" uid="uid://dy3e6rotqbl3n" path="res://assets/fonts/ArchivoBlack.ttf" id="9_k71xi"]
+[ext_resource type="Script" uid="uid://bu64uwf38pccx" path="res://assets/scripts/FadeText.cs" id="15_b1clc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0rse4"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x5h0d"]
+material = SubResource("StandardMaterial3D_0rse4")
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o8vi5"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ipe1n"]
+render_priority = 0
+shader = ExtResource("2_dcxel")
+shader_parameter/albedo_tex = ExtResource("3_45xgo")
+shader_parameter/opacity = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_wuld0"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1x41b"]
+size = Vector3(2.5, 0.5, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jka67"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_mwcq1"]
+material = SubResource("StandardMaterial3D_jka67")
+size = Vector3(2.5, 0.5, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4dysh"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2iedx"]
+material = SubResource("StandardMaterial3D_4dysh")
+size = Vector3(2.5, 0.5, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ipe1n"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rrsvi"]
+material = SubResource("StandardMaterial3D_ipe1n")
+size = Vector3(1.25, 0.3, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1clc"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wejjs"]
+material = SubResource("StandardMaterial3D_b1clc")
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="Environment" id="Environment_bvxot"]
+background_mode = 1
+background_color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0tk4"]
+transparency = 1
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(1, 1, 1, 0.12156863)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i3dh0"]
+material = SubResource("StandardMaterial3D_a0tk4")
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uolpc"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_31ged"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dwiow"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wsg8a"]
+size = Vector3(1000, 0.1, 1000)
+
+[node name="Level2" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_x5h0d")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_o8vi5")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D3"]
+mesh = SubResource("BoxMesh_x5h0d")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+shape = SubResource("BoxShape3D_o8vi5")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 3, -13, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D2"]
+mesh = SubResource("BoxMesh_x5h0d")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_o8vi5")
+
+[node name="Door" type="StaticBody3D" parent="." node_paths=PackedStringArray("mesh", "coll")]
+transform = Transform3D(-1.3113416e-07, -1, 0, 3, -4.371139e-08, 0, 0, 0, 3, -17.7, 4.5, 0)
+script = ExtResource("1_3ti0f")
+mesh = NodePath("MeshInstance3D2")
+coll = NodePath("CollisionShape3D")
+mat = SubResource("ShaderMaterial_ipe1n")
+DE = ExtResource("4_ipe1n")
+DD = ExtResource("5_b1clc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Door"]
+mesh = SubResource("BoxMesh_wuld0")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door"]
+shape = SubResource("BoxShape3D_o8vi5")
+
+[node name="Checkpoint" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10000062, -0.3, 0)
+visible = false
+script = ExtResource("1_mfnpu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_1x41b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Checkpoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_mwcq1")
+
+[node name="Finish" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 0)
+script = ExtResource("1_mfnpu")
+FinishLine = true
+ReplenishLight = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Finish"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_1x41b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Finish"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_2iedx")
+
+[node name="Button" type="MeshInstance3D" parent="." node_paths=PackedStringArray("Player", "InteractLabel", "Button", "SFX", "door")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0.3, 0)
+mesh = SubResource("BoxMesh_rrsvi")
+skeleton = NodePath("../..")
+script = ExtResource("6_wejjs")
+Player = NodePath("../Player")
+InteractLabel = NodePath("Label3D")
+Button = NodePath("MeshInstance3D2")
+SFX = NodePath("SFX")
+door = NodePath("../Door")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Button"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20000002, 0)
+mesh = SubResource("BoxMesh_wejjs")
+skeleton = NodePath("../../..")
+
+[node name="Label3D" type="Label3D" parent="Button"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+visible = false
+billboard = 1
+text = "E"
+font_size = 100
+outline_size = 25
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="Button"]
+stream = ExtResource("7_rrsvi")
+
+[node name="DO NOT REMOVE BELOW" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bvxot")
+
+[node name="Coyote" type="Timer" parent="."]
+wait_time = 0.35
+one_shot = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10000, 0)
+visible = false
+mesh = SubResource("BoxMesh_i3dh0")
+
+[node name="Player" parent="." node_paths=PackedStringArray("Coyote", "LightPlatformVis", "LightPlatform", "RootScene") instance=ExtResource("2_wejjs")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.8, 0)
+Coyote = NodePath("../Coyote")
+LightPlatformVis = NodePath("../MeshInstance3D")
+StartPlatforms = 1
+LightPlatform = NodePath("../LightPlatform")
+RootScene = NodePath("..")
+NextLevel = ExtResource("6_wuld0")
+
+[node name="LightPlatform" type="StaticBody3D" parent="." node_paths=PackedStringArray("mesh", "SFX")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10000, 0)
+visible = false
+script = ExtResource("3_rrsvi")
+LifeTime = 5.0
+mat = SubResource("StandardMaterial3D_uolpc")
+mesh = NodePath("MeshInstance3D2")
+SFX = NodePath("SFX")
+Place = ExtResource("4_3ti0f")
+Dissapear = ExtResource("5_k71xi")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="LightPlatform"]
+mesh = SubResource("BoxMesh_31ged")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LightPlatform"]
+shape = SubResource("BoxShape3D_dwiow")
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="LightPlatform"]
+stream = ExtResource("4_3ti0f")
+
+[node name="Floor" type="Area3D" parent="."]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_wsg8a")
+debug_color = Color(1, 0, 0, 1)
+
+[node name="Label3D6" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.899998, 1.5000002, 0)
+double_sided = false
+text = "Press the button to open the door :D"
+font = ExtResource("9_k71xi")
+script = ExtResource("15_b1clc")
+
+[connection signal="body_entered" from="Checkpoint" to="Checkpoint" method="Collided"]
+[connection signal="body_entered" from="Finish" to="Finish" method="Collided"]
+[connection signal="finished" from="LightPlatform/SFX" to="LightPlatform" method="finish"]

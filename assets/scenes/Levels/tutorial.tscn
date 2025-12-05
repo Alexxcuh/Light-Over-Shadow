@@ -1,0 +1,335 @@
+[gd_scene load_steps=31 format=3 uid="uid://ceajwtm8n48dt"]
+
+[ext_resource type="FontFile" uid="uid://dy3e6rotqbl3n" path="res://assets/fonts/ArchivoBlack.ttf" id="1_4dysh"]
+[ext_resource type="Script" uid="uid://clw5yfm1yhaqx" path="res://assets/scripts/Finish.cs" id="1_gdqiy"]
+[ext_resource type="Script" uid="uid://4l82yuwlemm5" path="res://assets/scripts/LightPlatform.cs" id="2_a4qfa"]
+[ext_resource type="AudioStream" uid="uid://cemwbfsjlkkud" path="res://assets/visuals/place.wav" id="3_trfbv"]
+[ext_resource type="AudioStream" uid="uid://dk4gld3l402xh" path="res://assets/visuals/dissapear.wav" id="4_5jq4b"]
+[ext_resource type="PackedScene" uid="uid://hw2a4fa17vxc" path="res://assets/scenes/player.tscn" id="5_tygdc"]
+[ext_resource type="PackedScene" uid="uid://cuwctu8iu8bjk" path="res://assets/scenes/Levels/Level1.tscn" id="7_5121h"]
+[ext_resource type="Script" uid="uid://bu64uwf38pccx" path="res://assets/scripts/FadeText.cs" id="8_fqpx7"]
+
+[sub_resource type="Environment" id="Environment_4xowi"]
+background_mode = 1
+background_color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5121h"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wc5p8"]
+material = SubResource("StandardMaterial3D_5121h")
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r3fl7"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a202f"]
+material = SubResource("StandardMaterial3D_5121h")
+size = Vector3(6, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a202f"]
+size = Vector3(6, 0.5, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4arys"]
+material = SubResource("StandardMaterial3D_5121h")
+size = Vector3(6, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6iypd"]
+size = Vector3(6, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a0tk4"]
+size = Vector3(2.5, 0.5, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fqpx7"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_i5arm"]
+material = SubResource("StandardMaterial3D_fqpx7")
+size = Vector3(2.5, 0.5, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5121h"]
+size = Vector3(6, 0.5, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywn66"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_slasq"]
+material = SubResource("StandardMaterial3D_ywn66")
+size = Vector3(6, 0.5, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4dysh"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5121h"]
+material = SubResource("StandardMaterial3D_4dysh")
+size = Vector3(2.5, 0.5, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3fl7"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_jka67"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4arys"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
+size = Vector3(1000, 0.1, 1000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmrkq"]
+transparency = 1
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(1, 1, 1, 0.12156863)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r3fl7"]
+material = SubResource("StandardMaterial3D_nmrkq")
+size = Vector3(3, 0.5, 3)
+
+[node name="Tutorial" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4xowi")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_wc5p8")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_r3fl7")
+
+[node name="Label3D3" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.899998, 1.8000001, 0)
+double_sided = false
+text = "Press CTRL to go under"
+font = ExtResource("1_4dysh")
+script = ExtResource("8_fqpx7")
+
+[node name="Label3D4" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -25.999998, 1.3000002, 0)
+double_sided = false
+text = "Great!
+Now, one last thing, Coyote Jumping
+when you fall off a platform, there's a
+time window where you can jump
+and save yourself, give it a shot!"
+font = ExtResource("1_4dysh")
+script = ExtResource("8_fqpx7")
+
+[node name="Label3D5" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -35.899998, -4.5, 0)
+double_sided = false
+text = "Press Tab to go back to
+your checkpoint
+I gave you a platform too
+Gray checkpoints are just
+replenishers, they give you 
+light platforms without setting
+your checkpoint to them."
+font = ExtResource("1_4dysh")
+script = ExtResource("8_fqpx7")
+
+[node name="Label3D6" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -38.899998, 1.5000002, 0)
+double_sided = false
+text = "Good Job!"
+font = ExtResource("1_4dysh")
+script = ExtResource("8_fqpx7")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(1.95, 0, 0, 0, 5.9534993, 0, 0, 0, 1.4725, -19.9, 2.9, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D3"]
+mesh = SubResource("BoxMesh_wc5p8")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+shape = SubResource("BoxShape3D_r3fl7")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1, -15.3, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D2"]
+transform = Transform3D(1.8899999, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+mesh = SubResource("BoxMesh_a202f")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1.8899999, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+shape = SubResource("BoxShape3D_a202f")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D4"]
+mesh = SubResource("BoxMesh_4arys")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D4"]
+shape = SubResource("BoxShape3D_6iypd")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="."]
+transform = Transform3D(1.05, 0, 0, 0, 1, 0, 0, 0, 1, -32.9, -6, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D5"]
+mesh = SubResource("BoxMesh_4arys")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D5"]
+shape = SubResource("BoxShape3D_6iypd")
+
+[node name="StaticBody3D6" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -36.25, -3.25, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D6"]
+mesh = SubResource("BoxMesh_4arys")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D6"]
+shape = SubResource("BoxShape3D_6iypd")
+
+[node name="StaticBody3D7" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -29.55, -3.25, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D7"]
+mesh = SubResource("BoxMesh_4arys")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D7"]
+shape = SubResource("BoxShape3D_6iypd")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.300001, 0, 0)
+script = ExtResource("1_gdqiy")
+ReplenishLight = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_a0tk4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_i5arm")
+
+[node name="Area3D3" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.800003, -6, 0)
+script = ExtResource("1_gdqiy")
+ReplenishLight = 1
+replenisher = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.099998474, 0.099999905, 0)
+shape = SubResource("BoxShape3D_5121h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.099998474, 0.099999905, 0)
+mesh = SubResource("BoxMesh_slasq")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.6, 0, 0)
+script = ExtResource("1_gdqiy")
+FinishLine = true
+ReplenishLight = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_a0tk4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_5121h")
+
+[node name="LightPlatform" type="StaticBody3D" parent="." node_paths=PackedStringArray("mesh", "SFX")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10000, 0)
+visible = false
+script = ExtResource("2_a4qfa")
+LifeTime = 5.0
+mat = SubResource("StandardMaterial3D_r3fl7")
+mesh = NodePath("MeshInstance3D2")
+SFX = NodePath("SFX")
+Place = ExtResource("3_trfbv")
+Dissapear = ExtResource("4_5jq4b")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="LightPlatform"]
+mesh = SubResource("BoxMesh_jka67")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LightPlatform"]
+shape = SubResource("BoxShape3D_4arys")
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="LightPlatform"]
+stream = ExtResource("3_trfbv")
+
+[node name="Player" parent="." node_paths=PackedStringArray("Coyote", "LightPlatformVis", "LightPlatform", "RootScene") instance=ExtResource("5_tygdc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.8, 0)
+Coyote = NodePath("../Coyote")
+LightPlatformVis = NodePath("../MeshInstance3D")
+LightPlatform = NodePath("../LightPlatform")
+RootScene = NodePath("..")
+NextLevel = ExtResource("7_5121h")
+
+[node name="Coyote" type="Timer" parent="."]
+wait_time = 0.35
+one_shot = true
+
+[node name="Floor" type="Area3D" parent="."]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_noarx")
+debug_color = Color(1, 0, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10000, 0)
+visible = false
+mesh = SubResource("BoxMesh_r3fl7")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+mesh = SubResource("BoxMesh_r3fl7")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+mesh = SubResource("BoxMesh_r3fl7")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.5, 1.5999999, 0)
+double_sided = false
+text = "Right Click then Left Click to place Light Platforms
+
+remember that you only have a 
+limited amount of light platforms
+"
+font = ExtResource("1_4dysh")
+script = ExtResource("8_fqpx7")
+
+[node name="Label3D2" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -13.8, 1.5999999, 0)
+double_sided = false
+text = "Great Job!
+as you can see, the platforms
+fade away after 5 seconds"
+font = ExtResource("1_4dysh")
+script = ExtResource("8_fqpx7")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="Collided"]
+[connection signal="body_entered" from="Area3D3" to="Area3D3" method="Collided"]
+[connection signal="body_entered" from="Area3D2" to="Area3D2" method="Collided"]
+[connection signal="finished" from="LightPlatform/SFX" to="LightPlatform" method="finish"]

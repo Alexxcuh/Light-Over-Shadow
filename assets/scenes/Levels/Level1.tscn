@@ -1,0 +1,300 @@
+[gd_scene load_steps=26 format=3 uid="uid://cuwctu8iu8bjk"]
+
+[ext_resource type="Script" uid="uid://clw5yfm1yhaqx" path="res://assets/scripts/Finish.cs" id="1_fhyqq"]
+[ext_resource type="Script" uid="uid://4l82yuwlemm5" path="res://assets/scripts/LightPlatform.cs" id="2_ik1e2"]
+[ext_resource type="AudioStream" uid="uid://cemwbfsjlkkud" path="res://assets/visuals/place.wav" id="3_1a10c"]
+[ext_resource type="Script" uid="uid://bu64uwf38pccx" path="res://assets/scripts/FadeText.cs" id="3_1rpta"]
+[ext_resource type="PackedScene" uid="uid://bhefxxv44qhd7" path="res://assets/scenes/Levels/Level2.tscn" id="4_1a10c"]
+[ext_resource type="AudioStream" uid="uid://dk4gld3l402xh" path="res://assets/visuals/dissapear.wav" id="4_1rpta"]
+[ext_resource type="PackedScene" uid="uid://hw2a4fa17vxc" path="res://assets/scenes/player.tscn" id="5_4v7cn"]
+[ext_resource type="FontFile" uid="uid://dy3e6rotqbl3n" path="res://assets/fonts/ArchivoBlack.ttf" id="6_ik1e2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noarx"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x5h0d"]
+material = SubResource("StandardMaterial3D_noarx")
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o8vi5"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1a10c"]
+material = SubResource("StandardMaterial3D_noarx")
+size = Vector3(12, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1rpta"]
+size = Vector3(12, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1x41b"]
+size = Vector3(2.5, 0.5, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jka67"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_mwcq1"]
+material = SubResource("StandardMaterial3D_jka67")
+size = Vector3(2.5, 0.5, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4dysh"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ik1e2"]
+material = SubResource("StandardMaterial3D_4dysh")
+size = Vector3(2.5, 0.5, 2.5)
+
+[sub_resource type="Environment" id="Environment_bvxot"]
+background_mode = 1
+background_color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0tk4"]
+transparency = 1
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(1, 1, 1, 0.12156863)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i3dh0"]
+material = SubResource("StandardMaterial3D_a0tk4")
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uolpc"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_31ged"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dwiow"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wsg8a"]
+size = Vector3(1000, 0.1, 1000)
+
+[node name="Level1" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_x5h0d")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_o8vi5")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1000004, 1, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D2"]
+mesh = SubResource("BoxMesh_x5h0d")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_o8vi5")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.099999, 2.5, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D3"]
+mesh = SubResource("BoxMesh_x5h0d")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+shape = SubResource("BoxShape3D_o8vi5")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.499999, 2.6, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D4"]
+mesh = SubResource("BoxMesh_x5h0d")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D4"]
+shape = SubResource("BoxShape3D_o8vi5")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.400001, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D5"]
+mesh = SubResource("BoxMesh_1a10c")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D5"]
+shape = SubResource("BoxShape3D_1rpta")
+
+[node name="StaticBody3D6" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D6"]
+mesh = SubResource("BoxMesh_x5h0d")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D6"]
+shape = SubResource("BoxShape3D_o8vi5")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0999975, 2.5, 0)
+script = ExtResource("1_fhyqq")
+ReplenishLight = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_1x41b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_mwcq1")
+
+[node name="Area3D3" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0)
+script = ExtResource("1_fhyqq")
+ReplenishLight = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_1x41b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_mwcq1")
+
+[node name="Area3D4" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33, 0, 0)
+script = ExtResource("1_fhyqq")
+FinishLine = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_1x41b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_ik1e2")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.5, 1.5999999, 0)
+double_sided = false
+text = "Now, try doing this easy jump"
+font = ExtResource("6_ik1e2")
+script = ExtResource("3_1rpta")
+
+[node name="Label3D7" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -21.5, 1.5999999, 0)
+double_sided = false
+text = "Try Placing the Platforms on your own!"
+font = ExtResource("6_ik1e2")
+script = ExtResource("3_1rpta")
+
+[node name="Label3D8" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.5, 1.3999999, 0)
+double_sided = false
+text = "Nobody's perfect
+no need to try it if you cant do it
+:D"
+font = ExtResource("6_ik1e2")
+script = ExtResource("3_1rpta")
+
+[node name="Label3D2" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5, 2.6, 0)
+double_sided = false
+text = "Easy, Right?
+ Now try this one"
+font = ExtResource("6_ik1e2")
+script = ExtResource("3_1rpta")
+
+[node name="Label3D4" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.700001, 3.6, 0)
+double_sided = false
+text = "You did it!
+Now try this one, it isn't vertical like the others ones"
+font = ExtResource("6_ik1e2")
+script = ExtResource("3_1rpta")
+
+[node name="Label3D6" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.800001, 3.6, 0)
+double_sided = false
+text = "Good Job!"
+font = ExtResource("6_ik1e2")
+script = ExtResource("3_1rpta")
+
+[node name="Label3D3" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.5, 1.7999997, 0)
+billboard = 1
+double_sided = false
+text = "Isn't as easy, is it?
+Try jumping then crouching :)"
+font = ExtResource("6_ik1e2")
+script = ExtResource("3_1rpta")
+
+[node name="Label3D5" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -12.5, 1.7999997, 0)
+billboard = 1
+double_sided = false
+text = "Remember Coyote Jumping?
+fall off the platform a bit then jump"
+font = ExtResource("6_ik1e2")
+script = ExtResource("3_1rpta")
+
+[node name="DO NOT REMOVE BELOW" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bvxot")
+
+[node name="Coyote" type="Timer" parent="."]
+wait_time = 0.35
+one_shot = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10000, 0)
+visible = false
+mesh = SubResource("BoxMesh_i3dh0")
+
+[node name="Player" parent="." node_paths=PackedStringArray("Coyote", "LightPlatformVis", "LightPlatform", "RootScene") instance=ExtResource("5_4v7cn")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.8, 0)
+Coyote = NodePath("../Coyote")
+LightPlatformVis = NodePath("../MeshInstance3D")
+StartPlatforms = 0
+LightPlatform = NodePath("../LightPlatform")
+RootScene = NodePath("..")
+NextLevel = ExtResource("4_1a10c")
+
+[node name="LightPlatform" type="StaticBody3D" parent="." node_paths=PackedStringArray("mesh", "SFX")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10000, 0)
+visible = false
+script = ExtResource("2_ik1e2")
+LifeTime = 5.0
+mat = SubResource("StandardMaterial3D_uolpc")
+mesh = NodePath("MeshInstance3D2")
+SFX = NodePath("SFX")
+Place = ExtResource("3_1a10c")
+Dissapear = ExtResource("4_1rpta")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="LightPlatform"]
+mesh = SubResource("BoxMesh_31ged")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LightPlatform"]
+shape = SubResource("BoxShape3D_dwiow")
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="LightPlatform"]
+stream = ExtResource("3_1a10c")
+
+[node name="Floor" type="Area3D" parent="."]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_wsg8a")
+debug_color = Color(1, 0, 0, 1)
+
+[connection signal="body_entered" from="Area3D2" to="Area3D2" method="Collided"]
+[connection signal="body_entered" from="Area3D3" to="Area3D3" method="Collided"]
+[connection signal="body_entered" from="Area3D4" to="Area3D4" method="Collided"]
+[connection signal="finished" from="LightPlatform/SFX" to="LightPlatform" method="finish"]
