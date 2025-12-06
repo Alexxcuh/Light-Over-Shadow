@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://hw2a4fa17vxc"]
+[gd_scene load_steps=17 format=3 uid="uid://hw2a4fa17vxc"]
 
 [ext_resource type="Script" uid="uid://ym12001vrsy2" path="res://assets/scripts/Player.cs" id="1_8sknh"]
 [ext_resource type="AudioStream" uid="uid://cf8tg8p5h137e" path="res://assets/visuals/jump.wav" id="2_0gfpk"]
@@ -39,9 +39,6 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o5c66"]
 texture = SubResource("GradientTexture2D_0hrit")
 
-[sub_resource type="LabelSettings" id="LabelSettings_4arys"]
-font_size = 50
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0gfpk"]
 bg_color = Color(0, 0, 0, 0.2)
 corner_radius_top_left = 15
@@ -52,7 +49,7 @@ corner_radius_bottom_left = 15
 [sub_resource type="LabelSettings" id="LabelSettings_0hrit"]
 font_size = 30
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "xBone", "yBone", "Collision", "HeadBonk", "PlaceSomewhere", "light", "TimeLabel", "SFX", "PauseMenu", "Next", "contr", "NormalMenu", "TickTimer")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "xBone", "yBone", "Collision", "HeadBonk", "PlaceSomewhere", "light", "TimeLabel", "SFX", "PauseMenu", "Next", "DemoSave", "contr", "NormalMenu", "TickTimer")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 script = ExtResource("1_8sknh")
 camera = NodePath("x/y/Camera3D")
@@ -68,6 +65,7 @@ Jump = ExtResource("2_0gfpk")
 Crouch = ExtResource("3_0hrit")
 PauseMenu = NodePath("x/y/Camera3D/CanvasLayer/Control/PauseMenu")
 Next = NodePath("x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/Next")
+DemoSave = NodePath("x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/SaveDemo")
 contr = NodePath("x/y/Camera3D/CanvasLayer/Control/PauseMenu/Controls")
 NormalMenu = NodePath("x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu")
 TickTimer = NodePath("Tick")
@@ -172,7 +170,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Text" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu"]
+[node name="Text" type="RichTextLabel" parent="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -183,8 +181,9 @@ offset_left = -576.0
 offset_top = -320.112
 offset_right = 576.0
 offset_bottom = -128.112
-text = "Paused"
-label_settings = SubResource("LabelSettings_4arys")
+bbcode_enabled = true
+text = "Paused
+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -210,6 +209,12 @@ text = "Next Level"
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 text = "Restart"
+
+[node name="SaveDemo" type="Button" parent="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Save Demo"
 
 [node name="Controls" type="Button" parent="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 45)
@@ -299,6 +304,7 @@ autostart = true
 
 [connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/Next" to="." method="NextLvl"]
 [connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/Restart2" to="." method="Restart"]
+[connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/SaveDemo" to="." method="SaveDemo"]
 [connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/Controls" to="." method="Controls"]
 [connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/MM" to="." method="MainMenu"]
 [connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/Quit" to="." method="Quit"]

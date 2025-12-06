@@ -27,13 +27,14 @@ public partial class Player : CharacterBody3D
     [Export] public Node3D RootScene;
     [Export] private Label TimeLabel;
     public bool finished;
-    private float Time;
+    public float Time;
     [Export] AudioStreamPlayer3D SFX;
     [Export] AudioStream Jump;
     [Export] AudioStream Crouch;
     [Export] Panel PauseMenu;
     [Export] PackedScene NextLevel = null;
     [Export] Godot.Button Next;
+    [Export] Godot.Button DemoSave;
     private PackedScene mmnu;
     [Export] private Control contr;
     [Export] private Control NormalMenu;
@@ -78,6 +79,13 @@ public partial class Player : CharacterBody3D
     }
     bool temp = false;
     bool doorstuck = false;
+    public void SaveDemo()
+    {
+        if (paused && levelended) {
+            Demo.SaveDemo(this);
+            DemoSave.Visible = false;
+        }
+    }
     public void Pause(int fixd = -1, bool end = false)
     {
         if (levelended == false && !contr.Visible && enabled)
@@ -86,12 +94,22 @@ public partial class Player : CharacterBody3D
             else paused = fixd != 0;
             if (end)
             {
-                PauseMenu.GetNode<Control>("NormalMenu").GetNode<Label>("Text").Text = $"Level Finished\n{TimeLabel.Text}";
+                DemoSave.Visible = true;
+                LevelData SaveData = SaveFile.Read();
+                PauseMenu.GetNode<Control>("NormalMenu").GetNode<RichTextLabel>("Text").Text = $"Level Finished!\n[font_size=25][color=#ff6]{TimeLabel.Text}[/color]";
+                if (SaveData.Levels.GetValueOrDefault(RootScene.Name) != null && SaveData != new LevelData{}){
+                    float TimeSave = SaveData.Levels[RootScene.Name].Time;
+                    PauseMenu.GetNode<Control>("NormalMenu").GetNode<RichTextLabel>("Text").Text += $"\nPB: [color=#6f6]{(int)(TimeSave / 60 % 60):00}:{(int)(TimeSave % 60):00}.{(int)(TimeSave * 100 % 100):00}[/color]";
+                }
                 Positions.Add(new Vector4(Position.X,Position.Y,Position.Z,(float)(b*TickTimer.WaitTime)));
                 ticks++;
                 Times = [.. Times, Time];
                 b=0;
-                if (RootScene.Name.ToString() != "SaveWatch") Demo.SaveDemo(this);
+                if (RootScene.Name.ToString() != "SaveWatch"){
+                    if (SaveData.Levels.GetValueOrDefault(RootScene.Name) != null) {
+                        if (SaveData.Levels[RootScene.Name].Time > Time) SaveFile.Save(this);
+                    } else SaveFile.Save(this);
+                };
             }
             PauseMenu.Visible = paused;
             if (paused) Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -110,7 +128,7 @@ public partial class Player : CharacterBody3D
         Positions = [];
         PlatformTicks = [];
         levelended = false;
-        PauseMenu.GetNode<Control>("NormalMenu").GetNode<Label>("Text").Text = "Paused";
+        PauseMenu.GetNode<Control>("NormalMenu").GetNode<RichTextLabel>("Text").Text = "Paused";
         Pause(0);
         Time = 0;
         ticks = 0;

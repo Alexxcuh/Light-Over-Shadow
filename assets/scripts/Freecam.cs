@@ -80,7 +80,8 @@ public partial class Freecam : Node3D
     int[] PlatformTicks;
     public void Selec(int index)
     {
-        Level = Options.GetItemText(index);
+        b = Demo.LoadDemo(Options.GetItemText(index));
+        Level = b.Level;
         Init();
         Discord drpc = GetTree().Root.GetNode<Discord>("DiscordRPC");
         float EndTime = b.times[^1];
@@ -99,13 +100,13 @@ public partial class Freecam : Node3D
     public void Init()
     {
         EmitSignal(SignalName.Reset);
-        b = Demo.LoadDemo(Level);
         LoadMap(Level);
         Positions = b.Poss;
         PlatformTicks = b.Platforms.Select(static v => Mathf.RoundToInt(v.W)).ToArray();
         i = 0;
         GuessTime = 0;
         maxi = Positions.Count;
+        Timeline.Value = i;
         Timeline.MaxValue = maxi;
         DemoPaused = true;
         Pauseb.Icon = Playic;
