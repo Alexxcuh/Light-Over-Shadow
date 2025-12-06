@@ -1,10 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://8kqg02okervf"]
+[gd_scene load_steps=26 format=3 uid="uid://8kqg02okervf"]
 
 [ext_resource type="Script" uid="uid://dg7ffju6qkcvm" path="res://assets/scripts/rotatee.cs" id="1_8omcj"]
 [ext_resource type="Texture2D" uid="uid://hws5wgw8ftdm" path="res://assets/visuals/sphere.png" id="1_c4qlh"]
+[ext_resource type="Script" uid="uid://boou6c7xi2h12" path="res://assets/scenes/Menu.cs" id="1_u7y45"]
 [ext_resource type="Script" uid="uid://vatlrqmvksv" path="res://assets/scripts/MainMenuButtons.cs" id="1_xuqax"]
 [ext_resource type="Theme" uid="uid://ba5dhns3igvhd" path="res://assets/visuals/Theme.tres" id="2_0wlwb"]
 [ext_resource type="Script" uid="uid://bplwvvekxxg0x" path="res://assets/scripts/LevelButton.cs" id="2_8aat6"]
+[ext_resource type="PackedScene" uid="uid://cx1ci5hvv7b1f" path="res://assets/scenes/Discord.tscn" id="2_ji2u7"]
 [ext_resource type="PackedScene" uid="uid://ceajwtm8n48dt" path="res://assets/scenes/Levels/Tutorial.tscn" id="3_ugn2o"]
 [ext_resource type="FontFile" uid="uid://dy3e6rotqbl3n" path="res://assets/fonts/ArchivoBlack.ttf" id="4_c4qlh"]
 [ext_resource type="PackedScene" uid="uid://cuwctu8iu8bjk" path="res://assets/scenes/Levels/Level1.tscn" id="5_q8r6g"]
@@ -62,6 +64,8 @@ font_size = 30
 font_color = Color(1, 1, 1, 0.31764707)
 
 [node name="Menu" type="Node2D"]
+script = ExtResource("1_u7y45")
+DiscordRPC = ExtResource("2_ji2u7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

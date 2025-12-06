@@ -11,4 +11,4 @@ Game Jam submission made for the Solo Development Game Jam #9
 Theme: **Black and White**
 
 ## What type of game is this?
-This is a fast-paced puzzle-platformer game where you want to finish the level as quickly as possible, with the only end goal being to be fast.
+This is a fast-paced puzzle-platformer game where you want to finish the level as quickly as possible, with the only end goal being to be fast. :D

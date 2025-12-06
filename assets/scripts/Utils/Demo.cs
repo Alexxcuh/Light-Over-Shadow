@@ -2,7 +2,7 @@ using System.Linq;
 using System.Text.Json;
 using Godot;
 
-namespace LOSUtil
+namespace LOSUtils
 {
     public static class Demo
     {

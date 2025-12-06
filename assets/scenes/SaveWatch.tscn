@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bcbos2sqw1jd0"]
+[gd_scene load_steps=44 format=3 uid="uid://bcbos2sqw1jd0"]
 
 [ext_resource type="Script" uid="uid://4l82yuwlemm5" path="res://assets/scripts/LightPlatform.cs" id="3_kybur"]
 [ext_resource type="AudioStream" uid="uid://cemwbfsjlkkud" path="res://assets/visuals/place.wav" id="4_tufgn"]
@@ -78,19 +78,12 @@ font_size = 23
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_266lg"]
 
-[sub_resource type="Gradient" id="Gradient_uivg0"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0.1637931, 1)
-colors = PackedColorArray(0, 0, 0, 0.6666667, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_cc3bd"]
-gradient = SubResource("Gradient_uivg0")
-width = 25
-height = 25
-fill_from = Vector2(1, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xypor"]
-texture = SubResource("GradientTexture2D_cc3bd")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cc3bd"]
+bg_color = Color(0, 0, 0, 0.49803922)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [sub_resource type="Gradient" id="Gradient_gyn26"]
 offsets = PackedFloat32Array(0.58064514, 0.66935486)
@@ -110,6 +103,10 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.16862746, 0.16862746, 0.16862746, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 expand_margin_top = 1.0
 expand_margin_bottom = 1.0
 
@@ -120,6 +117,10 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 expand_margin_top = 1.0
 expand_margin_bottom = 1.0
 
@@ -161,7 +162,7 @@ corner_radius_bottom_left = 15
 [sub_resource type="LabelSettings" id="LabelSettings_b32kl"]
 font_size = 30
 
-[node name="SaveWatch" type="Node3D"]
+[node name="DemoWatch" type="Node3D"]
 
 [node name="DO NOT REMOVE BELOW" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bvxot")
@@ -279,13 +280,16 @@ theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_266lg")
 [node name="Timeline" type="Panel" parent="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.901
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -47.848022
+offset_left = 8.0
+offset_top = -80.0
+offset_right = -8.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_xypor")
+theme_override_styles/panel = SubResource("StyleBoxFlat_cc3bd")
 
 [node name="Timeline" type="HSlider" parent="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control/Timeline"]
 layout_mode = 1
@@ -294,9 +298,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = -80.0
+offset_top = -68.0
 offset_right = -16.0
-offset_bottom = -64.0
+offset_bottom = -52.0
 theme_override_icons/grabber = SubResource("GradientTexture2D_mk5td")
 theme_override_icons/grabber_highlight = SubResource("GradientTexture2D_mk5td")
 theme_override_icons/grabber_disabled = SubResource("GradientTexture2D_mk5td")

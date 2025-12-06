@@ -1,8 +1,8 @@
 using Godot;
-using LOSUtil;
+using LOSUtils;
 using System.Collections.Generic;
 using System.Linq;
-
+using DiscordRPC;
 public partial class Player : CharacterBody3D
 {
     public bool enabled = true;
@@ -33,7 +33,7 @@ public partial class Player : CharacterBody3D
     [Export] AudioStream Crouch;
     [Export] Panel PauseMenu;
     [Export] PackedScene NextLevel = null;
-    [Export] Button Next;
+    [Export] Godot.Button Next;
     private PackedScene mmnu;
     [Export] private Control contr;
     [Export] private Control NormalMenu;
@@ -43,6 +43,7 @@ public partial class Player : CharacterBody3D
     public float[] Times = [];
     public Godot.Collections.Array<Vector4> PlatformTicks = [];
     public bool paused = false;
+    public Discord DRPC;
     public override void _Input(InputEvent @event)
     {
         if (@event is InputEventMouseMotion mouse && !paused && enabled)
@@ -58,6 +59,9 @@ public partial class Player : CharacterBody3D
 
     public override void _Ready()
     {
+        Discord drpc = GetTree().Root.GetNodeOrNull<Discord>("DiscordRPC");
+
+        if (drpc != null && drpc.client != null && enabled) drpc.UpdatePresence($"Playing {GetTree().CurrentScene.Name}");
         SpawnPoint = Position;
         StartPoint = SpawnPoint;
         lightstuff = StartPlatforms;

@@ -1,5 +1,4 @@
 using Godot;
-using LOSUtil;
 using LOSUtils;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -83,6 +82,9 @@ public partial class Freecam : Node3D
     {
         Level = Options.GetItemText(index);
         Init();
+        Discord drpc = GetTree().Root.GetNode<Discord>("DiscordRPC");
+        float EndTime = b.times[^1];
+        drpc.UpdatePresence($"Watching Demo File: {Options.GetItemText(index)}.ADT",$"End Time of {(int)(EndTime / 60 % 60):00}:{(int)(EndTime % 60):00}.{(int)(EndTime * 100 % 100):00}");
     }
     public override void _Ready()
     {
@@ -92,7 +94,7 @@ public partial class Freecam : Node3D
             Options.AddItem(item.Split(".ADT")[0]);
         }
         Options.Selected = Options.ItemCount-1;
-        Init();
+        Selec(Options.ItemCount-1);
     }
     public void Init()
     {

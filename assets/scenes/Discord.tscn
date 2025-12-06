@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx1ci5hvv7b1f"]
+
+[ext_resource type="Script" path="res://assets/scripts/Utils/Discord.cs" id="1_ivm11"]
+
+[node name="Discord" type="Node"]
+script = ExtResource("1_ivm11")
