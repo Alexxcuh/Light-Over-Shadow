@@ -18,6 +18,10 @@ public partial class MainMenuButtons : VBoxContainer
             }
         }
     }
+    public void Demo()
+    {
+        GetTree().ChangeSceneToFile("res://assets/scenes/SaveWatch.tscn");
+    }
     public void Controls()
     {
         MainMenu.Visible = false;

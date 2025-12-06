@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://vatlrqmvksv" path="res://assets/scripts/MainMenuButtons.cs" id="1_xuqax"]
 [ext_resource type="Theme" uid="uid://ba5dhns3igvhd" path="res://assets/visuals/Theme.tres" id="2_0wlwb"]
 [ext_resource type="Script" uid="uid://bplwvvekxxg0x" path="res://assets/scripts/LevelButton.cs" id="2_8aat6"]
-[ext_resource type="PackedScene" uid="uid://ceajwtm8n48dt" path="res://assets/scenes/Levels/tutorial.tscn" id="3_ugn2o"]
+[ext_resource type="PackedScene" uid="uid://ceajwtm8n48dt" path="res://assets/scenes/Levels/Tutorial.tscn" id="3_ugn2o"]
 [ext_resource type="FontFile" uid="uid://dy3e6rotqbl3n" path="res://assets/fonts/ArchivoBlack.ttf" id="4_c4qlh"]
 [ext_resource type="PackedScene" uid="uid://cuwctu8iu8bjk" path="res://assets/scenes/Levels/Level1.tscn" id="5_q8r6g"]
 [ext_resource type="Texture2D" uid="uid://dfpeqsiy2wyfi" path="res://assets/visuals/Level.png" id="7_c4qlh"]
@@ -103,7 +103,6 @@ theme = ExtResource("2_0wlwb")
 theme_override_styles/panel = SubResource("StyleBoxTexture_c4qlh")
 
 [node name="MainMenu" type="Control" parent="CanvasLayer/Panel"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,6 +130,11 @@ contr = NodePath("../../Controls")
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 text = "Play"
+
+[node name="Watch Demos" type="Button" parent="CanvasLayer/Panel/MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Watch Demos"
 
 [node name="Controls" type="Button" parent="CanvasLayer/Panel/MainMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 45)
@@ -169,7 +173,7 @@ sdf_scale = 2
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
 size = Vector2i(640, 304)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="CanvasLayer/Panel/MainMenu/SubViewportContainer/SubViewport"]
 fov = 67.0
@@ -198,6 +202,7 @@ font = ExtResource("4_c4qlh")
 outline_size = 25
 
 [node name="Levels" type="Control" parent="CanvasLayer/Panel"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -504,6 +509,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [connection signal="pressed" from="CanvasLayer/Panel/MainMenu/VBoxContainer/Play" to="CanvasLayer/Panel/MainMenu/VBoxContainer" method="LevelMenu"]
+[connection signal="pressed" from="CanvasLayer/Panel/MainMenu/VBoxContainer/Watch Demos" to="CanvasLayer/Panel/MainMenu/VBoxContainer" method="Demo"]
 [connection signal="pressed" from="CanvasLayer/Panel/MainMenu/VBoxContainer/Controls" to="CanvasLayer/Panel/MainMenu/VBoxContainer" method="Controls"]
 [connection signal="pressed" from="CanvasLayer/Panel/MainMenu/VBoxContainer/Quit" to="CanvasLayer/Panel/MainMenu/VBoxContainer" method="Quit"]
 [connection signal="pressed" from="CanvasLayer/Panel/Levels/NewContainer/Level/Play" to="CanvasLayer/Panel/Levels/NewContainer/Level" method="pressed"]

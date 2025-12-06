@@ -1,8 +1,11 @@
 using Godot;
+using LOSUtil;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class Player : CharacterBody3D
 {
+    public bool enabled = true;
     public float Speed = 2f;
     public const float JumpVelocity = 5.0f;
     public float death_line = -50f;
@@ -21,7 +24,7 @@ public partial class Player : CharacterBody3D
     public int lightstuff = 0;
     [Export] private Label light;
     [Export] private LightPlatform LightPlatform;
-    [Export] private Node3D RootScene;
+    [Export] public Node3D RootScene;
     [Export] private Label TimeLabel;
     public bool finished;
     private float Time;
@@ -34,10 +37,15 @@ public partial class Player : CharacterBody3D
     private PackedScene mmnu;
     [Export] private Control contr;
     [Export] private Control NormalMenu;
+    [Export] private Timer TickTimer;
+    [Export] private LightPlatform Platform;
+    public Godot.Collections.Array<Vector4> Positions = [];
+    public float[] Times = [];
+    public Godot.Collections.Array<Vector4> PlatformTicks = [];
     public bool paused = false;
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventMouseMotion mouse && !paused)
+        if (@event is InputEventMouseMotion mouse && !paused && enabled)
         {
             Input.MouseMode = Input.MouseModeEnum.Captured;
             Vector3 rotdg = yBone.RotationDegrees;
@@ -68,19 +76,25 @@ public partial class Player : CharacterBody3D
     bool doorstuck = false;
     public void Pause(int fixd = -1, bool end = false)
     {
-        if (levelended == false && !contr.Visible)
+        if (levelended == false && !contr.Visible && enabled)
         {
             if (fixd == -1) paused = !paused;
             else paused = fixd != 0;
             if (end)
             {
                 PauseMenu.GetNode<Control>("NormalMenu").GetNode<Label>("Text").Text = $"Level Finished\n{TimeLabel.Text}";
+                Positions.Add(new Vector4(Position.X,Position.Y,Position.Z,(float)(b*TickTimer.WaitTime)));
+                ticks++;
+                Times = [.. Times, Time];
+                b=0;
+                if (RootScene.Name.ToString() != "SaveWatch") Demo.SaveDemo(this);
             }
             PauseMenu.Visible = paused;
             if (paused) Input.MouseMode = Input.MouseModeEnum.Visible;
             Engine.TimeScale = paused ? 0 : 1;
             levelended = end;
         }
+        recording = !paused;
         contr.Visible = false;
         NormalMenu.Visible = true;
     }
@@ -89,12 +103,16 @@ public partial class Player : CharacterBody3D
     public void Restart()
     {
         EmitSignal(SignalName.Reset);
+        Positions = [];
+        PlatformTicks = [];
         levelended = false;
         PauseMenu.GetNode<Control>("NormalMenu").GetNode<Label>("Text").Text = "Paused";
         Pause(0);
         Time = 0;
+        ticks = 0;
         SpawnPoint = StartPoint;
         Position = SpawnPoint;
+        Times = [];
         Velocity = Vector3.Zero;
         lightstuff = StartPlatforms;
         finished = false;
@@ -109,8 +127,36 @@ public partial class Player : CharacterBody3D
         mmnu = ResourceLoader.Load<PackedScene>("res://assets/scenes/menu.tscn");
         GetTree().ChangeSceneToPacked(mmnu);
     }
+    int ticks = 0;
+    int b = 0;
+    bool recording = false;
+    public void Tick()
+    {
+        if (!enabled) return;
+        TickTimer.Start();
+        Vector4 Pos = Positions.LastOrDefault().Round();
+        if ((Position*100f).Round()/10f != new Vector3(Pos.X,Pos.Y,Pos.Z)){
+            Positions.Add(new Vector4(Position.X,Position.Y,Position.Z,(float)(b*TickTimer.WaitTime)));
+            ticks++;
+            Times = [.. Times, Time];
+            b=0;
+            return;
+        }
+        b++;
+    }
+    bool justincase = false;
     public override void _PhysicsProcess(double delta)
     {
+        if (!enabled) {
+            if (justincase == false)
+            {
+                xBone.QueueFree();
+                Collision.QueueFree();
+                TickTimer.QueueFree();
+                justincase = true;
+            }
+            return;
+        }
         if (Input.IsActionJustPressed("Pause"))
         {
             Pause();
@@ -195,6 +241,7 @@ public partial class Player : CharacterBody3D
                         RootScene.AddChild(Platform);
                         Platform.plr = this;
                         Platform.Init();
+                        PlatformTicks.Add(new Vector4(Platform.Position.X,Platform.Position.Y,Platform.Position.Z,ticks));
                         this.Reset += () =>
                         {
                             if (IsInstanceValid(Platform))

@@ -153,7 +153,7 @@ size = Vector3(3, 0.5, 3)
 [sub_resource type="BoxShape3D" id="BoxShape3D_wsg8a"]
 size = Vector3(1000, 0.1, 1000)
 
-[node name="Level1" type="Node3D"]
+[node name="Level4" type="Node3D"]
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -13.5, 7.6, 0)
