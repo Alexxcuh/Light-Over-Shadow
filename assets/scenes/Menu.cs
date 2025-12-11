@@ -4,6 +4,11 @@ using System;
 public partial class Menu : Node2D
 {
     [Export] public PackedScene DiscordRPC;
+    public override void _Ready()
+    {
+        Discord drpc = GetTree().Root.GetNodeOrNull<Discord>("DiscordRPC");
+        if (drpc != null) drpc.UpdatePresence("On Menu");
+    }
     public override void _PhysicsProcess(double delta)
     {
         if (GetTree().Root.GetNodeOrNull<Discord>("DiscordRPC") == null)

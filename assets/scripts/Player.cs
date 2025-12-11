@@ -40,7 +40,7 @@ public partial class Player : CharacterBody3D
     [Export] private Control NormalMenu;
     [Export] private Timer TickTimer;
     [Export] private LightPlatform Platform;
-    public Godot.Collections.Array<Vector4> Positions = [];
+    public Godot.Collections.Array<Vector3> Positions = [];
     public float[] Times = [];
     public Godot.Collections.Array<Vector4> PlatformTicks = [];
     public bool paused = false;
@@ -101,7 +101,7 @@ public partial class Player : CharacterBody3D
                     float TimeSave = SaveData.Levels[RootScene.Name].Time;
                     PauseMenu.GetNode<Control>("NormalMenu").GetNode<RichTextLabel>("Text").Text += $"\nPB: [color=#6f6]{(int)(TimeSave / 60 % 60):00}:{(int)(TimeSave % 60):00}.{(int)(TimeSave * 100 % 100):00}[/color]";
                 }
-                Positions.Add(new Vector4(Position.X,Position.Y,Position.Z,(float)(b*TickTimer.WaitTime)));
+                Positions.Add(new Vector3(Position.X,Position.Y,Position.Z));
                 ticks++;
                 Times = [.. Times, Time];
                 b=0;
@@ -124,6 +124,7 @@ public partial class Player : CharacterBody3D
     public delegate void ResetEventHandler();
     public void Restart()
     {
+        DemoSave.Visible = false;
         EmitSignal(SignalName.Reset);
         Positions = [];
         PlatformTicks = [];
@@ -156,14 +157,10 @@ public partial class Player : CharacterBody3D
     {
         if (!enabled) return;
         TickTimer.Start();
-        Vector4 Pos = Positions.LastOrDefault().Round();
-        if ((Position*100f).Round()/10f != new Vector3(Pos.X,Pos.Y,Pos.Z)){
-            Positions.Add(new Vector4(Position.X,Position.Y,Position.Z,(float)(b*TickTimer.WaitTime)));
-            ticks++;
-            Times = [.. Times, Time];
-            b=0;
-            return;
-        }
+        Positions.Add(new Vector3(Position.X,Position.Y,Position.Z));
+        Times = [.. Times, Time];
+        b=0;
+        ticks++;
         b++;
     }
     bool justincase = false;
