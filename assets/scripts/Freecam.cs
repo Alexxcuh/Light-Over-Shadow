@@ -29,14 +29,14 @@ public partial class Freecam : Node3D
     [Export] CompressedTexture2D Playic;
 
     private bool DemoPaused;
-    public Godot.Collections.Array<Vector4> Positions = [];
-    public Vector4 Pos;
+    public Godot.Collections.Array<Vector3> Positions = [];
+    public Vector3 Pos;
     public Vector2 MouseVel;
     public float Zoom = 5f;
     public float MaxZoom = 15f;
     public float MinZoom = 1f;
     public float ZoomStep = 0.25f;
-    (Godot.Collections.Array<Vector4> Platforms, float[] times, string Level, Godot.Collections.Array<Vector4> Poss) b;
+    (Godot.Collections.Array<Vector4> Platforms, float[] times, string Level, Godot.Collections.Array<Vector3> Poss, Godot.Collections.Array<Vector3> Vels) b;
     public override void _Input(InputEvent @event)
     {
         if (@event is InputEventMouseMotion mouse)
@@ -178,24 +178,40 @@ public partial class Freecam : Node3D
     int i = 0;
     int maxi = 0;
     int pc = 0;
+    public void AdvanceTick()
+    {
+        if (Input.IsActionPressed("UI_BACK"))
+        {
+            DemoPaused = true;
+            lasttick = i;
+            i--;
+        } else if (Input.IsActionPressed("UI_FORWARD"))
+        {
+            DemoPaused = true;
+            lasttick = i;
+            i++;
+        }
+        if (i>maxi) i = maxi;
+        if (i<0) i = 0;
+    }
+    int lasttick;
     public void Tick()
     {
         TickTimer.Start();
         if (i >= maxi) return;
-        if (Pos.W > TickTimer.WaitTime) Pos.W -= (float)TickTimer.WaitTime;
-        else
-        {
-            if (!DemoPaused)i++;
-            if (i < maxi) Pos = Positions[i];
-        }
+        lasttick = i;
+        if (!DemoPaused)i++;
+        AdvanceTick();
+        if (i < maxi) Pos = Positions[i];
         ActualTime = b.times[i];
-        if (PlatformTicks.Contains(i))
+        if (PlatformTicks.Contains(i) && lasttick != i && LevelGroup.GetNodeOrNull(i.ToString()) == null)
         {
             pc=MathA.Compare(PlatformTicks, i)-1;
             LightPlatform Platform = (LightPlatform)LightPlatform.Duplicate();
             Platform.enabled = true;
             Platform.Position = new Vector3(b.Platforms[pc].X,b.Platforms[pc].Y,b.Platforms[pc].Z);
             Platform.Visible = true;
+            Platform.Name = i.ToString();
             LevelGroup.AddChild(Platform);
             Platform.Init();
             this.Reset += () =>
@@ -231,7 +247,7 @@ public partial class Freecam : Node3D
         EmitSignal(SignalName.Reset);
         pc = 0;
         i = 0;
-        Pos = Vector4.Zero;
+        Pos = Vector3.Zero;
         PauseMenu.GetNode<Control>("NormalMenu").GetNode<Label>("Text").Text = "Paused";
         Pause(0);
         GuessTime = 0;
