@@ -1,5 +1,6 @@
-[gd_scene load_steps=48 format=3 uid="uid://dh1u3xsxd8127"]
+[gd_scene load_steps=49 format=3 uid="uid://dh1u3xsxd8127"]
 
+[ext_resource type="Script" uid="uid://ipbggsk3kbdk" path="res://assets/scripts/LevelIdentifier.cs" id="1_aonaf"]
 [ext_resource type="FontFile" uid="uid://dy3e6rotqbl3n" path="res://assets/fonts/ArchivoBlack.ttf" id="1_o3rbb"]
 [ext_resource type="Script" uid="uid://clw5yfm1yhaqx" path="res://assets/scripts/Finish.cs" id="1_vfbhi"]
 [ext_resource type="PackedScene" uid="uid://hw2a4fa17vxc" path="res://assets/scenes/player.tscn" id="2_ax1fw"]
@@ -154,6 +155,8 @@ size = Vector3(3, 0.5, 3)
 size = Vector3(1000, 0.1, 1000)
 
 [node name="Level4" type="Node3D"]
+script = ExtResource("1_aonaf")
+LevelName = "More Tabs Later"
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -13.5, 7.6, 0)

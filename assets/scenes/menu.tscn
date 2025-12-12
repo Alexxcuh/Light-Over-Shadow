@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://8kqg02okervf"]
+[gd_scene load_steps=29 format=3 uid="uid://8kqg02okervf"]
 
 [ext_resource type="Script" uid="uid://dg7ffju6qkcvm" path="res://assets/scripts/rotatee.cs" id="1_8omcj"]
 [ext_resource type="Texture2D" uid="uid://hws5wgw8ftdm" path="res://assets/visuals/sphere.png" id="1_c4qlh"]
@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://cthtdtmecdybc" path="res://assets/scenes/Controls.tscn" id="9_ujvk5"]
 [ext_resource type="PackedScene" uid="uid://n5b62mpbo317" path="res://assets/scenes/Levels/Level3.tscn" id="10_4jp7k"]
 [ext_resource type="PackedScene" uid="uid://dh1u3xsxd8127" path="res://assets/scenes/Levels/Level4.tscn" id="11_nf3ne"]
+[ext_resource type="PackedScene" uid="uid://63yyn5go6jbc" path="res://assets/scenes/Levels/Level5.tscn" id="15_1jjir"]
+[ext_resource type="Script" uid="uid://7j3piws8gbpb" path="res://assets/scenes/scroll.cs" id="17_iegxf"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_0wlwb"]
 flip_faces = true
@@ -62,6 +64,9 @@ font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_xuqax"]
 font_color = Color(1, 1, 1, 0.31764707)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qmvdg"]
+bg_color = Color(1, 1, 0, 1)
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_u7y45")
@@ -245,7 +250,6 @@ Icon = NodePath("Mask/Icon")
 _Name = NodePath("LevelName")
 Play = NodePath("Play")
 AssociatedLevel = ExtResource("3_ugn2o")
-LevelName = "Basics"
 
 [node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level"]
 clip_children = 1
@@ -291,7 +295,6 @@ Icon = NodePath("Mask/Icon")
 _Name = NodePath("LevelName")
 Play = NodePath("Play")
 AssociatedLevel = ExtResource("5_q8r6g")
-LevelName = "Jumping"
 
 [node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level2"]
 clip_children = 1
@@ -337,7 +340,6 @@ Icon = NodePath("Mask/Icon")
 _Name = NodePath("LevelName")
 Play = NodePath("Play")
 AssociatedLevel = ExtResource("9_0ujva")
-LevelName = "The Button"
 
 [node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level3"]
 clip_children = 1
@@ -383,7 +385,6 @@ Icon = NodePath("Mask/Icon")
 _Name = NodePath("LevelName")
 Play = NodePath("Play")
 AssociatedLevel = ExtResource("10_4jp7k")
-LevelName = "Time Flies By"
 
 [node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level4"]
 clip_children = 1
@@ -429,7 +430,6 @@ Icon = NodePath("Mask/Icon")
 _Name = NodePath("LevelName")
 Play = NodePath("Play")
 AssociatedLevel = ExtResource("11_nf3ne")
-LevelName = "Many Tabs Later"
 
 [node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level5"]
 clip_children = 1
@@ -460,6 +460,51 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Play" type="Button" parent="CanvasLayer/Panel/Levels/NewContainer/Level5"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 200.0
+offset_right = 290.0
+offset_bottom = 241.17647
+text = "Play"
+
+[node name="Level6" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer" node_paths=PackedStringArray("Icon", "_Name", "Play")]
+custom_minimum_size = Vector2(300, 250)
+layout_mode = 2
+script = ExtResource("2_8aat6")
+Icon = NodePath("Mask/Icon")
+_Name = NodePath("LevelName")
+Play = NodePath("Play")
+AssociatedLevel = ExtResource("15_1jjir")
+
+[node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level6"]
+clip_children = 1
+clip_contents = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 290.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u7y45")
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Panel/Levels/NewContainer/Level6/Mask"]
+layout_mode = 0
+offset_right = 280.0
+offset_bottom = 140.0
+texture = ExtResource("7_c4qlh")
+
+[node name="LevelName" type="Label" parent="CanvasLayer/Panel/Levels/NewContainer/Level6"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.9850001
+offset_top = 157.0
+offset_bottom = -65.250015
+text = "Level Name"
+label_settings = SubResource("LabelSettings_8aat6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer/Panel/Levels/NewContainer/Level6"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 200.0
@@ -512,6 +557,28 @@ label_settings = SubResource("LabelSettings_xuqax")
 horizontal_alignment = 2
 vertical_alignment = 1
 
+[node name="Panel" type="Panel" parent="CanvasLayer/Panel" node_paths=PackedStringArray("BaseLabel")]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qmvdg")
+script = ExtResource("17_iegxf")
+BaseLabel = NodePath("Label")
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+text = "THIS IS THE EXPERIMENTAL VERSION EXPECT BUGS OR WHATNOT - github.com/Alexxcuh/Light-Over-Shadow"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="CanvasLayer/Panel/MainMenu/VBoxContainer/Play" to="CanvasLayer/Panel/MainMenu/VBoxContainer" method="LevelMenu"]
 [connection signal="pressed" from="CanvasLayer/Panel/MainMenu/VBoxContainer/Watch Demos" to="CanvasLayer/Panel/MainMenu/VBoxContainer" method="Demo"]
 [connection signal="pressed" from="CanvasLayer/Panel/MainMenu/VBoxContainer/Controls" to="CanvasLayer/Panel/MainMenu/VBoxContainer" method="Controls"]
@@ -521,3 +588,4 @@ vertical_alignment = 1
 [connection signal="pressed" from="CanvasLayer/Panel/Levels/NewContainer/Level3/Play" to="CanvasLayer/Panel/Levels/NewContainer/Level3" method="pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/Levels/NewContainer/Level4/Play" to="CanvasLayer/Panel/Levels/NewContainer/Level4" method="pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/Levels/NewContainer/Level5/Play" to="CanvasLayer/Panel/Levels/NewContainer/Level5" method="pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/Levels/NewContainer/Level6/Play" to="CanvasLayer/Panel/Levels/NewContainer/Level6" method="pressed"]

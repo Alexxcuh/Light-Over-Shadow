@@ -1,5 +1,6 @@
-[gd_scene load_steps=36 format=3 uid="uid://n5b62mpbo317"]
+[gd_scene load_steps=37 format=3 uid="uid://n5b62mpbo317"]
 
+[ext_resource type="Script" uid="uid://ipbggsk3kbdk" path="res://assets/scripts/LevelIdentifier.cs" id="1_eij6x"]
 [ext_resource type="Script" uid="uid://clw5yfm1yhaqx" path="res://assets/scripts/Finish.cs" id="1_m5l0s"]
 [ext_resource type="PackedScene" uid="uid://hw2a4fa17vxc" path="res://assets/scenes/player.tscn" id="2_xuoc6"]
 [ext_resource type="PackedScene" uid="uid://dh1u3xsxd8127" path="res://assets/scenes/Levels/Level4.tscn" id="3_0edno"]
@@ -111,6 +112,8 @@ material = SubResource("StandardMaterial3D_mfnpu")
 size = Vector3(1, 0.2, 1)
 
 [node name="Level3" type="Node3D"]
+script = ExtResource("1_eij6x")
+LevelName = "Time Flies By"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

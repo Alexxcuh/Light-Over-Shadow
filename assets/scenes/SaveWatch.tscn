@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bcbos2sqw1jd0"]
+[gd_scene load_steps=49 format=3 uid="uid://bcbos2sqw1jd0"]
 
 [ext_resource type="Script" uid="uid://4l82yuwlemm5" path="res://assets/scripts/LightPlatform.cs" id="3_kybur"]
 [ext_resource type="AudioStream" uid="uid://cemwbfsjlkkud" path="res://assets/visuals/place.wav" id="4_tufgn"]
@@ -51,6 +51,9 @@ shader_parameter/edge_color = Color(0.49803922, 0.49803922, 0.49803922, 1)
 [sub_resource type="QuadMesh" id="QuadMesh_v74c1"]
 material = SubResource("ShaderMaterial_a0tk4")
 
+[sub_resource type="LabelSettings" id="LabelSettings_r4cr7"]
+font_size = 23
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gyn26"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mk5td"]
@@ -59,34 +62,16 @@ material = SubResource("ShaderMaterial_a0tk4")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cc3bd"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_r4cr7"]
-font_size = 23
+[sub_resource type="Gradient" id="Gradient_uivg0"]
+offsets = PackedFloat32Array(0.060344826, 0.9137931)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xypor"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cc3bd"]
+gradient = SubResource("Gradient_uivg0")
+fill_from = Vector2(1, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ess56"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ukypu"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w28ks"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k1jff"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3w8kv"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8cwlm"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_266lg"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cc3bd"]
-bg_color = Color(0, 0, 0, 0.49019608)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.56078434, 0.56078434, 0.56078434, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xypor"]
+texture = SubResource("GradientTexture2D_cc3bd")
 
 [sub_resource type="Gradient" id="Gradient_gyn26"]
 offsets = PackedFloat32Array(0.58064514, 0.66935486)
@@ -124,16 +109,29 @@ corner_radius_bottom_left = 5
 expand_margin_top = 3.0
 expand_margin_bottom = 3.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gyn26"]
-bg_color = Color(1, 1, 1, 0.49803922)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-expand_margin_left = 8.0
-expand_margin_top = 8.0
-expand_margin_right = 8.0
-expand_margin_bottom = 8.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pht7n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c3uor"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vi8ab"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7t6f0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xypor"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ess56"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ukypu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w28ks"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k1jff"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3w8kv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8cwlm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_266lg"]
 
 [sub_resource type="Gradient" id="Gradient_gl5s2"]
 offsets = PackedFloat32Array(0.5, 1)
@@ -212,7 +210,7 @@ LightPlatform = NodePath("../../LightPlatform")
 LevelGroup = NodePath("../../Level")
 Timeline = NodePath("y/Camera3D/CanvasLayer/Control/Timeline/Timeline")
 Pauseb = NodePath("y/Camera3D/CanvasLayer/Control/Timeline/Button")
-Options = NodePath("y/Camera3D/CanvasLayer/Control/Options")
+Options = NodePath("y/Camera3D/CanvasLayer/Control/Timeline/Options")
 Pauseic = ExtResource("7_mk5td")
 Playic = ExtResource("6_uivg0")
 
@@ -238,15 +236,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("6_tufgn")
 
-[node name="Button" type="Button" parent="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control"]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_gyn26")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_mk5td")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_uivg0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_cc3bd")
-
 [node name="Time" type="Label" parent="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 1
@@ -261,21 +250,14 @@ text = "00:00.00"
 label_settings = SubResource("LabelSettings_r4cr7")
 horizontal_alignment = 2
 
-[node name="Options" type="OptionButton" parent="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = -1
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 328.0
-offset_bottom = 9.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_xypor")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_ess56")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_ukypu")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_w28ks")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_k1jff")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_3w8kv")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8cwlm")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_266lg")
+[node name="Button" type="Button" parent="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gyn26")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mk5td")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_uivg0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_cc3bd")
 
 [node name="Timeline" type="Panel" parent="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control"]
 layout_mode = 1
@@ -283,13 +265,11 @@ anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -80.0
-offset_right = -8.0
+offset_top = -104.0
 offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_cc3bd")
+theme_override_styles/panel = SubResource("StyleBoxTexture_xypor")
 
 [node name="Timeline" type="HSlider" parent="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control/Timeline"]
 layout_mode = 1
@@ -314,9 +294,9 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 32.0
+offset_left = 24.0
 offset_top = -56.0
-offset_right = 56.0
+offset_right = 48.0
 offset_bottom = -32.0
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -325,12 +305,34 @@ theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 0.5019608)
-theme_override_styles/normal = SubResource("StyleBoxFlat_gyn26")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_gyn26")
-theme_override_styles/hover = SubResource("StyleBoxFlat_gyn26")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_gyn26")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pht7n")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_c3uor")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vi8ab")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7t6f0")
 icon = ExtResource("7_mk5td")
+icon_alignment = 1
 expand_icon = true
+
+[node name="Options" type="OptionButton" parent="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control/Timeline"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -336.0
+offset_top = -60.0
+offset_right = -16.0
+offset_bottom = -28.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xypor")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_ess56")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ukypu")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_w28ks")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_k1jff")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_3w8kv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8cwlm")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_266lg")
+alignment = 1
 
 [node name="PauseMenu" type="Panel" parent="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control"]
 visible = false
@@ -467,9 +469,9 @@ autostart = true
 [node name="Level" type="Node3D" parent="."]
 
 [connection signal="finished" from="LightPlatform/SFX" to="LightPlatform" method="finish"]
-[connection signal="item_selected" from="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control/Options" to="MeshInstance3D2/x" method="Selec"]
 [connection signal="value_changed" from="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control/Timeline/Timeline" to="MeshInstance3D2/x" method="Changed"]
 [connection signal="pressed" from="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control/Timeline/Button" to="MeshInstance3D2/x" method="DemoPause"]
+[connection signal="item_selected" from="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control/Timeline/Options" to="MeshInstance3D2/x" method="Selec"]
 [connection signal="pressed" from="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/Restart2" to="MeshInstance3D2/x" method="Restart"]
 [connection signal="pressed" from="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/Controls" to="MeshInstance3D2/x" method="Controls"]
 [connection signal="pressed" from="MeshInstance3D2/x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/MM" to="MeshInstance3D2/x" method="MainMenu"]

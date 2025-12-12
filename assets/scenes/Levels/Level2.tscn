@@ -1,6 +1,7 @@
-[gd_scene load_steps=37 format=3 uid="uid://bhefxxv44qhd7"]
+[gd_scene load_steps=38 format=3 uid="uid://bhefxxv44qhd7"]
 
 [ext_resource type="Script" uid="uid://bn8qgxne4de7t" path="res://assets/scripts/Door.cs" id="1_3ti0f"]
+[ext_resource type="Script" uid="uid://ipbggsk3kbdk" path="res://assets/scripts/LevelIdentifier.cs" id="1_aa0wg"]
 [ext_resource type="Script" uid="uid://clw5yfm1yhaqx" path="res://assets/scripts/Finish.cs" id="1_mfnpu"]
 [ext_resource type="Shader" uid="uid://dwgqqebpe751h" path="res://assets/visuals/scroll.gdshader" id="2_dcxel"]
 [ext_resource type="PackedScene" uid="uid://hw2a4fa17vxc" path="res://assets/scenes/player.tscn" id="2_wejjs"]
@@ -110,6 +111,8 @@ size = Vector3(3, 0.5, 3)
 size = Vector3(1000, 0.1, 1000)
 
 [node name="Level2" type="Node3D"]
+script = ExtResource("1_aa0wg")
+LevelName = "The Button"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
