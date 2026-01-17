@@ -329,6 +329,9 @@ fade away after 5 seconds"
 font = ExtResource("1_4dysh")
 script = ExtResource("8_fqpx7")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.7071068, -3.090862e-08, 0.7071068, -0.7071068, -3.090862e-08, 0.7071068, 0, -1, -4.3711392e-08, 0, 0, 0)
+
 [connection signal="body_entered" from="Area3D" to="Area3D" method="Collided"]
 [connection signal="body_entered" from="Area3D3" to="Area3D3" method="Collided"]
 [connection signal="body_entered" from="Area3D2" to="Area3D2" method="Collided"]

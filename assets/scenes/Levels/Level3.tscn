@@ -259,6 +259,9 @@ LightPlatform = NodePath("../LightPlatform")
 RootScene = NodePath("..")
 NextLevel = ExtResource("3_0edno")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.7071068, -3.090862e-08, 0.7071068, -0.7071068, -3.090862e-08, 0.7071068, 0, -1, -4.3711392e-08, 0, 0, 0)
+
 [node name="LightPlatform" type="StaticBody3D" parent="." node_paths=PackedStringArray("mesh", "SFX")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10000, 0)
 visible = false

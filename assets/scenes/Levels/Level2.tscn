@@ -267,6 +267,9 @@ text = "Press the button to open the door :D"
 font = ExtResource("9_k71xi")
 script = ExtResource("15_b1clc")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.7071068, -3.090862e-08, 0.7071068, -0.7071068, -3.090862e-08, 0.7071068, 0, -1, -4.3711392e-08, 0, 0, 0)
+
 [connection signal="body_entered" from="Checkpoint" to="Checkpoint" method="Collided"]
 [connection signal="body_entered" from="Finish" to="Finish" method="Collided"]
 [connection signal="finished" from="LightPlatform/SFX" to="LightPlatform" method="finish"]

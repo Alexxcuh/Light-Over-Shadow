@@ -8,17 +8,17 @@ using System.Security.Principal;
 public partial class Freecam : Node3D
 {
     [Export] MeshInstance3D player;
+    [Export] Node3D PlayerModel;
     [Export] Camera3D Cam;
     [Export] Node3D yBone;
     [Export] Panel PauseMenu;
     [Export] Control contr;
     [Export] Control NormalMenu;
     public PackedScene mmnu;
-    [Export] Timer TickTimer;
     [Export] Label TimeLabel;
     private float GuessTime;
     private float ActualTime;
-    [Export] LightPlatform LightPlatform;
+    [Export] LightPlatformReplay LightPlatform;
     [Export] public string Level = "Tutorial";
     [Export] private Node3D LevelGroup;
     [ExportGroup("UI")]
@@ -134,9 +134,20 @@ public partial class Freecam : Node3D
             pc=MathA.Compare(PlatformTicks, i);
         }
     }
-
-    public override void _PhysicsProcess(double delta)
+    float totaltime = 0f;
+    float countdown = 0.033f;
+    bool start = true;
+    public override void _Process(double delta)
     {
+        if (start) {
+            totaltime += (float)delta;
+            if (totaltime >= countdown)
+            {
+                totaltime = 0;
+                start = false;
+                Tick();
+            }
+        }
         RotationDegrees -= new Vector3(0, MouseVel.X, 0);
         yBone.RotationDegrees -= new Vector3(MouseVel.Y, 0, 0);
         yBone.RotationDegrees = new Vector3(Mathf.Clamp(yBone.RotationDegrees.X, -90, 90), 0, 0);
@@ -155,13 +166,21 @@ public partial class Freecam : Node3D
         _updatingTimeline = false;
 
         if (i<maxi) GuessTime += 1f * (float)delta;
+        Vector3 pos = player.Position;
         player.Position = new Vector3(
 
-            (float)Mathf.Lerp(player.Position.X,Pos.X,0.15f),
-            (float)Mathf.Lerp(player.Position.Y,Pos.Y,0.15f),
-            (float)Mathf.Lerp(player.Position.Z,Pos.Z,0.15f)
+            (float)Mathf.Lerp(player.Position.X,Pos.X,0.125f),
+            (float)Mathf.Lerp(player.Position.Y,Pos.Y,0.125f),
+            (float)Mathf.Lerp(player.Position.Z,Pos.Z,0.125f)
 
         );
+        Vector3 vel = player.Position-pos;
+        vel = vel.Normalized();
+        vel.Y = 0;
+        if (vel.Length() > 0.1 && i < maxi) {
+            PlayerModel.LookAt(player.Position+(vel*10.0f),Vector3.Up);
+            PlayerModel.RotationDegrees = new Vector3(0,PlayerModel.RotationDegrees.Y,0);
+        }
         base._PhysicsProcess(delta);
         if (Input.IsActionJustPressed("Pause"))
         {
@@ -175,7 +194,7 @@ public partial class Freecam : Node3D
         GetTree().ChangeSceneToPacked(mmnu);
     }
     int lasti = 0;
-    int i = 0;
+    public int i = 0;
     int maxi = 0;
     int pc = 0;
     public void AdvanceTick()
@@ -197,29 +216,51 @@ public partial class Freecam : Node3D
     int lasttick;
     public void Tick()
     {
-        TickTimer.Start();
+        start = true;
         if (i >= maxi) return;
         lasttick = i;
         if (!DemoPaused)i++;
         AdvanceTick();
         if (i < maxi) Pos = Positions[i];
         ActualTime = b.times[i];
-        if (PlatformTicks.Contains(i) && lasttick != i && LevelGroup.GetNodeOrNull(i.ToString()) == null)
+        // NEW SYSTEM
+        foreach (var item in PlatformTicks)
         {
-            pc=MathA.Compare(PlatformTicks, i)-1;
-            LightPlatform Platform = (LightPlatform)LightPlatform.Duplicate();
-            Platform.enabled = true;
-            Platform.Position = new Vector3(b.Platforms[pc].X,b.Platforms[pc].Y,b.Platforms[pc].Z);
-            Platform.Visible = true;
-            Platform.Name = i.ToString();
-            LevelGroup.AddChild(Platform);
-            Platform.Init();
-            this.Reset += () =>
-            {
-                if (IsInstanceValid(Platform))
-                    Platform.QueueFree();
-            };
+            if (i>=item && LevelGroup.GetNodeOrNull(item.ToString()) == null && item+LightPlatform.LifeTime*30 > i) {
+                LightPlatformReplay Platform = (LightPlatformReplay)LightPlatform.Duplicate();
+                Platform.spawnedontick = item;
+                Platform.enabled = true;
+                Vector4 Temp = b.Platforms[Array.IndexOf(PlatformTicks,item)];
+                Platform.Position = new Vector3(Temp.X,Temp.Y,Temp.Z);
+                Platform.Visible = true;
+                Platform.Name = item.ToString();
+                LevelGroup.AddChild(Platform);
+                Platform.Init();
+                Reset += () =>
+                {
+                    if (IsInstanceValid(Platform))
+                        Platform.QueueFree();
+                };
+            }
         }
+        // OLD SYSTEM
+        // if (PlatformTicks.Contains(i) && lasttick != i && LevelGroup.GetNodeOrNull(i.ToString()) == null)
+        // {
+        //     pc=MathA.Compare(PlatformTicks, i)-1;
+        //     LightPlatformReplay Platform = (LightPlatformReplay)LightPlatform.Duplicate();
+        //     Platform.spawnedontick = i;
+        //     Platform.enabled = true;
+        //     Platform.Position = new Vector3(b.Platforms[pc].X,b.Platforms[pc].Y,b.Platforms[pc].Z);
+        //     Platform.Visible = true;
+        //     Platform.Name = i.ToString();
+        //     LevelGroup.AddChild(Platform);
+        //     Platform.Init();
+        //     this.Reset += () =>
+        //     {
+        //         if (IsInstanceValid(Platform))
+        //             Platform.QueueFree();
+        //     };
+        // }
     }
     public void Controls()
     {

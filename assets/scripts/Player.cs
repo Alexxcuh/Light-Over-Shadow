@@ -38,7 +38,6 @@ public partial class Player : CharacterBody3D
     private PackedScene mmnu;
     [Export] private Control contr;
     [Export] private Control NormalMenu;
-    [Export] private Timer TickTimer;
     [Export] private LightPlatform Platform;
     public Godot.Collections.Array<Vector3> Positions = [];
     public float[] Times = [];
@@ -152,18 +151,34 @@ public partial class Player : CharacterBody3D
     }
     int ticks = 0;
     int b = 0;
+    bool start = true;
     bool recording = false;
     public void Tick()
     {
         if (!enabled) return;
-        TickTimer.Start();
+        start = true;
         Positions.Add(new Vector3(Position.X,Position.Y,Position.Z));
         Times = [.. Times, Time];
         b=0;
         ticks++;
         b++;
     }
+    float totaltime = 0f;
+    float countdown = 0.033f;
     bool justincase = false;
+    //TIMER SHIT
+    public override void _Process(double delta)
+    {
+        if (start) {
+            totaltime += (float)delta;
+            if (totaltime >= countdown)
+            {
+                totaltime = 0;
+                start = false;
+                Tick();
+            }
+        }
+    }
     public override void _PhysicsProcess(double delta)
     {
         if (!enabled) {
@@ -171,7 +186,7 @@ public partial class Player : CharacterBody3D
             {
                 xBone.QueueFree();
                 Collision.QueueFree();
-                TickTimer.QueueFree();
+                start = false;
                 justincase = true;
             }
             return;

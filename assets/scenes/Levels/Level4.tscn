@@ -107,6 +107,7 @@ shader_parameter/albedo_tex = ExtResource("10_fd61o")
 shader_parameter/opacity = 1.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_hmimk"]
+material = SubResource("ShaderMaterial_i2s5w")
 size = Vector3(4, 0.5, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_llh77"]
@@ -517,6 +518,9 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_wsg8a")
 debug_color = Color(1, 0, 0, 1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.70710677, -3.090862e-08, 0.70710677, -0.70710677, -3.090862e-08, 0.70710677, 0, -1, -4.371139e-08, 0, 0, 0)
 
 [connection signal="body_entered" from="Checkpoint" to="Checkpoint" method="Collided"]
 [connection signal="body_entered" from="Checkpoint2" to="Checkpoint2" method="Collided"]

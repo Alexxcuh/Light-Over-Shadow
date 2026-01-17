@@ -294,6 +294,9 @@ monitorable = false
 shape = SubResource("BoxShape3D_wsg8a")
 debug_color = Color(1, 0, 0, 1)
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.70710677, -3.090862e-08, 0.70710677, -0.70710677, -3.090862e-08, 0.70710677, 0, -1, -4.371139e-08, 0, 0, 0)
+
 [connection signal="body_entered" from="Area3D2" to="Area3D2" method="Collided"]
 [connection signal="body_entered" from="Area3D3" to="Area3D3" method="Collided"]
 [connection signal="body_entered" from="Area3D4" to="Area3D4" method="Collided"]
