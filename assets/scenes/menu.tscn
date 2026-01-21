@@ -1,64 +1,204 @@
-[gd_scene load_steps=26 format=3 uid="uid://8kqg02okervf"]
+[gd_scene load_steps=57 format=3 uid="uid://8kqg02okervf"]
 
 [ext_resource type="Script" uid="uid://dg7ffju6qkcvm" path="res://assets/scripts/rotatee.cs" id="1_8omcj"]
-[ext_resource type="Texture2D" uid="uid://hws5wgw8ftdm" path="res://assets/visuals/sphere.png" id="1_c4qlh"]
 [ext_resource type="Script" uid="uid://boou6c7xi2h12" path="res://assets/scenes/Menu.cs" id="1_u7y45"]
 [ext_resource type="Script" uid="uid://vatlrqmvksv" path="res://assets/scripts/MainMenuButtons.cs" id="1_xuqax"]
 [ext_resource type="Theme" uid="uid://ba5dhns3igvhd" path="res://assets/visuals/Theme.tres" id="2_0wlwb"]
 [ext_resource type="Script" uid="uid://bplwvvekxxg0x" path="res://assets/scripts/LevelButton.cs" id="2_8aat6"]
 [ext_resource type="PackedScene" uid="uid://cx1ci5hvv7b1f" path="res://assets/scenes/Discord.tscn" id="2_ji2u7"]
+[ext_resource type="Shader" uid="uid://behlvgg40cmi6" path="res://assets/visuals/menu.gdshader" id="3_1jjir"]
 [ext_resource type="PackedScene" uid="uid://ceajwtm8n48dt" path="res://assets/scenes/Levels/Tutorial.tscn" id="3_ugn2o"]
 [ext_resource type="FontFile" uid="uid://dy3e6rotqbl3n" path="res://assets/fonts/ArchivoBlack.ttf" id="4_c4qlh"]
+[ext_resource type="Texture2D" uid="uid://c0uiji2hl8261" path="res://assets/visuals/ass.png" id="4_qmvdg"]
 [ext_resource type="PackedScene" uid="uid://cuwctu8iu8bjk" path="res://assets/scenes/Levels/Level1.tscn" id="5_q8r6g"]
-[ext_resource type="Texture2D" uid="uid://dfpeqsiy2wyfi" path="res://assets/visuals/Level.png" id="7_c4qlh"]
+[ext_resource type="Texture2D" uid="uid://dfpeqsiy2wyfi" path="res://assets/scenes/Level.png" id="7_c4qlh"]
+[ext_resource type="Script" uid="uid://dwxi7gojj664x" path="res://assets/scripts/SettingsControls.cs" id="8_iegxf"]
+[ext_resource type="Script" uid="uid://cxdosm3am52rt" path="res://assets/scripts/LevelSecondary.cs" id="8_nf3ne"]
 [ext_resource type="PackedScene" uid="uid://bhefxxv44qhd7" path="res://assets/scenes/Levels/Level2.tscn" id="9_0ujva"]
 [ext_resource type="PackedScene" uid="uid://cthtdtmecdybc" path="res://assets/scenes/Controls.tscn" id="9_ujvk5"]
 [ext_resource type="PackedScene" uid="uid://n5b62mpbo317" path="res://assets/scenes/Levels/Level3.tscn" id="10_4jp7k"]
+[ext_resource type="PackedScene" uid="uid://b88qlu75mtm2k" path="res://assets/scenes/CommunityLevelPlayer.tscn" id="11_f4www"]
 [ext_resource type="PackedScene" uid="uid://dh1u3xsxd8127" path="res://assets/scenes/Levels/Level4.tscn" id="11_nf3ne"]
+[ext_resource type="PackedScene" uid="uid://celdlqgm3xyh2" path="res://assets/scenes/LevelButton.tscn" id="11_qmvdg"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_0wlwb"]
-flip_faces = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c4qlh"]
-transparency = 1
-shading_mode = 0
-diffuse_mode = 3
-specular_mode = 2
-albedo_texture = ExtResource("1_c4qlh")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iegxf"]
+shader = ExtResource("3_1jjir")
+shader_parameter/size = 25.00000114
+shader_parameter/color1 = Color(1, 1, 1, 1)
+shader_parameter/color2 = Color(0.7176471, 0.7176471, 0.7176471, 1)
+shader_parameter/img = ExtResource("4_qmvdg")
+shader_parameter/speed = 1.0
+shader_parameter/direction_x = 1.0
+shader_parameter/direction_y = 1.0
 
 [sub_resource type="Gradient" id="Gradient_0gfpk"]
-offsets = PackedFloat32Array(0.5, 1)
-colors = PackedColorArray(0, 0, 0, 0.49803922, 0, 0, 0, 0.6666667)
+offsets = PackedFloat32Array(0.54310346, 0.92241377)
+colors = PackedColorArray(0, 0, 0, 0.22352941, 0, 0, 0, 0.61960787)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_0hrit"]
 gradient = SubResource("Gradient_0gfpk")
-width = 16
-height = 16
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c4qlh"]
 texture = SubResource("GradientTexture2D_0hrit")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_doml5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_udh26"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f01t2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ydik"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g34h7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yhxa6"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c4qlh"]
 bg_color = Color(0, 0, 0, 0.2)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u7y45"]
-bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="LabelSettings" id="LabelSettings_8aat6"]
-font_size = 20
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iegxf"]
+bg_color = Color(0, 0, 0, 0.49803922)
+corner_radius_top_left = 100000
+corner_radius_top_right = 100000
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qmvdg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1jjir"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o8rbj"]
+bg_color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4www"]
+bg_color = Color(0.16862746, 0.16862746, 0.16862746, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qmvdg"]
+bg_color = Color(0.23031491, 0.23031494, 0.23031485, 1)
+border_width_top = 2
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iegxf"]
+
+[sub_resource type="Gradient" id="Gradient_iegxf"]
+offsets = PackedFloat32Array(0.61290324, 0.7016129)
+colors = PackedColorArray(0.23137255, 0.23137255, 0.23137255, 1, 0.23137255, 0.23137255, 0.23137255, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qmvdg"]
+gradient = SubResource("Gradient_iegxf")
+width = 24
+height = 24
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_1jjir"]
+offsets = PackedFloat32Array(0.61290324, 0.7016129)
+colors = PackedColorArray(0.41960785, 0.41960785, 0.41960785, 1, 0.41960785, 0.41960785, 0.41960785, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iegxf"]
+gradient = SubResource("Gradient_1jjir")
+width = 24
+height = 24
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ia1et"]
+bg_color = Color(0, 0, 0, 0.49803922)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iw1dx"]
+bg_color = Color(1, 1, 1, 0.49803922)
+corner_radius_top_left = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_doml5"]
+bg_color = Color(1, 1, 1, 0.49803922)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_1jjir"]
+color = Color(1, 1, 1, 0.49803922)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_8omcj"]
 font_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jjir"]
+bg_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u7y45"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_8aat6"]
+font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4jp7k"]
+bg_color = Color(0.12167999, 0.24, 0.1008, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nf3ne"]
+bg_color = Color(0.057799995, 0.17, 0.08958999, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw4oi"]
+bg_color = Color(0.23834999, 0.35, 0.147, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ji2u7"]
+bg_color = Color(0.1292, 0.17, 0.153, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_4jp7k"]
+font_size = 15
+font_color = Color(0.97333336, 1, 0.68, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_xuqax"]
 font_color = Color(1, 1, 1, 0.31764707)
@@ -69,33 +209,14 @@ DiscordRPC = ExtResource("2_ji2u7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_iegxf")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
-handle_input_locally = false
-scaling_3d_scale = 0.25
-texture_mipmap_bias = -2.0
-anisotropic_filtering_level = 0
-fsr_sharpness = 0.0
-size = Vector2i(1152, 648)
-render_target_update_mode = 4
-
-[node name="Node3D" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 4.15097, 0.5)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D"]
-transform = Transform3D(0.9848078, -0.17364818, 0, 0.17101008, 0.96984637, -0.17364818, 0.03015369, 0.17101008, 0.9848078, 0, 0, 0)
-mesh = SubResource("SphereMesh_0wlwb")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_c4qlh")
-
-[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.15097, 0.5)
-fov = 90.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
 anchors_preset = 15
@@ -106,15 +227,27 @@ grow_vertical = 2
 theme = ExtResource("2_0wlwb")
 theme_override_styles/panel = SubResource("StyleBoxTexture_c4qlh")
 
-[node name="MainMenu" type="Control" parent="CanvasLayer/Panel"]
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_doml5")
+theme_override_styles/tab_unselected = SubResource("StyleBoxEmpty_udh26")
+theme_override_styles/tab_hovered = SubResource("StyleBoxEmpty_f01t2")
+theme_override_styles/tab_selected = SubResource("StyleBoxEmpty_3ydik")
+theme_override_styles/tab_disabled = SubResource("StyleBoxEmpty_g34h7")
+theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_yhxa6")
+current_tab = 0
+tabs_visible = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel/MainMenu" node_paths=PackedStringArray("MainMenu", "Levels", "contr")]
+[node name="MainMenu" type="Control" parent="CanvasLayer/Panel/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel/TabContainer/MainMenu" node_paths=PackedStringArray("MainMenu", "Levels", "contr", "settings", "menu")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -129,28 +262,40 @@ script = ExtResource("1_xuqax")
 MainMenu = NodePath("..")
 Levels = NodePath("../../Levels")
 contr = NodePath("../../Controls")
+settings = NodePath("../../Settings")
+menu = NodePath("../../../../..")
 
-[node name="Play" type="Button" parent="CanvasLayer/Panel/MainMenu/VBoxContainer"]
+[node name="Play" type="Button" parent="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 text = "Play"
 
-[node name="Watch Demos" type="Button" parent="CanvasLayer/Panel/MainMenu/VBoxContainer"]
+[node name="Settings" type="Button" parent="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Settings"
+
+[node name="Watch Demos" type="Button" parent="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 text = "Watch Demos"
 
-[node name="Controls" type="Button" parent="CanvasLayer/Panel/MainMenu/VBoxContainer"]
+[node name="Level Editor" type="Button" parent="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Level Editor"
+
+[node name="Controls" type="Button" parent="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 text = "Controls"
 
-[node name="Quit" type="Button" parent="CanvasLayer/Panel/MainMenu/VBoxContainer"]
+[node name="Quit" type="Button" parent="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 text = "Quit"
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/Panel/MainMenu"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/Panel/TabContainer/MainMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -164,7 +309,7 @@ offset_bottom = -8.015991
 mouse_filter = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/Panel/MainMenu/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/Panel/TabContainer/MainMenu/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
 scaling_3d_scale = 0.4
@@ -179,11 +324,11 @@ positional_shadow_atlas_16_bits = false
 size = Vector2i(640, 304)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="CanvasLayer/Panel/MainMenu/SubViewportContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/Panel/TabContainer/MainMenu/SubViewportContainer/SubViewport"]
 fov = 67.0
 size = 1.916
 
-[node name="Label3D" type="Label3D" parent="CanvasLayer/Panel/MainMenu/SubViewportContainer/SubViewport/Camera3D" node_paths=PackedStringArray("panorama")]
+[node name="Label3D" type="Label3D" parent="CanvasLayer/Panel/TabContainer/MainMenu/SubViewportContainer/SubViewport/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.3)
 transparency = 0.15
 double_sided = false
@@ -193,9 +338,8 @@ text = "Light over Shadow"
 font = ExtResource("4_c4qlh")
 outline_size = 25
 script = ExtResource("1_8omcj")
-panorama = NodePath("../../../../../../SubViewportContainer/SubViewport/Camera3D")
 
-[node name="Label3D" type="Label3D" parent="CanvasLayer/Panel/MainMenu/SubViewportContainer/SubViewport/Camera3D/Label3D"]
+[node name="Label3D" type="Label3D" parent="CanvasLayer/Panel/TabContainer/MainMenu/SubViewportContainer/SubViewport/Camera3D/Label3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 transparency = 0.15
 double_sided = false
@@ -205,87 +349,156 @@ text = "Solo Dev GameJam"
 font = ExtResource("4_c4qlh")
 outline_size = 25
 
-[node name="Levels" type="Control" parent="CanvasLayer/Panel"]
+[node name="Settings" type="Control" parent="CanvasLayer/Panel/TabContainer" node_paths=PackedStringArray("mmb", "MouseSensitivity")]
 visible = false
+layout_mode = 2
+script = ExtResource("8_iegxf")
+mmb = NodePath("../MainMenu/VBoxContainer")
+MouseSensitivity = NodePath("Panel/TabContainer/Controls/VBoxContainer/MouseSensitivity")
+metadata/_tab_index = 1
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Panel/TabContainer/Settings"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.998
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = -22.70404
+theme_override_styles/panel = SubResource("StyleBoxFlat_c4qlh")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Panel/TabContainer/Settings/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 27.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_iegxf")
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/Panel/TabContainer/Settings/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/tab_separation = 15
+theme_override_styles/panel = SubResource("StyleBoxEmpty_qmvdg")
+theme_override_styles/tabbar_background = SubResource("StyleBoxEmpty_1jjir")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_o8rbj")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_f4www")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_qmvdg")
+theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_iegxf")
+tab_alignment = 1
+current_tab = 0
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Panel/Levels"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.98800004
-offset_left = 64.0
-offset_top = 64.0
-offset_right = -64.0
-offset_bottom = -16.223999
-theme_override_styles/panel = SubResource("StyleBoxFlat_c4qlh")
+[node name="Controls" type="Control" parent="CanvasLayer/Panel/TabContainer/Settings/Panel/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
 
-[node name="NewContainer" type="FlowContainer" parent="CanvasLayer/Panel/Levels"]
-clip_contents = true
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel/TabContainer/Settings/Panel/TabContainer/Controls"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 68.0
-offset_top = 68.0
-offset_right = -68.0
-offset_bottom = -28.0
-alignment = 1
+offset_left = 16.0
+offset_top = 29.0
+offset_right = -8.0
+offset_bottom = -10.0
 
-[node name="Level" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer" node_paths=PackedStringArray("Icon", "_Name", "Play")]
-custom_minimum_size = Vector2(300, 250)
+[node name="MouseSensitivity" type="HSlider" parent="CanvasLayer/Panel/TabContainer/Settings/Panel/TabContainer/Controls/VBoxContainer"]
 layout_mode = 2
-script = ExtResource("2_8aat6")
-Icon = NodePath("Mask/Icon")
-_Name = NodePath("LevelName")
-Play = NodePath("Play")
-AssociatedLevel = ExtResource("3_ugn2o")
-LevelName = "Basics"
+theme_override_icons/grabber = SubResource("GradientTexture2D_qmvdg")
+theme_override_icons/grabber_highlight = SubResource("GradientTexture2D_iegxf")
+theme_override_icons/grabber_disabled = SubResource("GradientTexture2D_iegxf")
+theme_override_styles/slider = SubResource("StyleBoxFlat_ia1et")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_iw1dx")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_doml5")
+min_value = 1.0
+max_value = 10.0
+step = 0.1
+value = 3.3
 
-[node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level"]
-clip_children = 1
-clip_contents = true
-layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 290.0
-offset_bottom = 150.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_u7y45")
+[node name="Label" type="Label" parent="CanvasLayer/Panel/TabContainer/Settings/Panel/TabContainer/Controls/VBoxContainer/MouseSensitivity"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -24.0
+offset_bottom = -5.0
+grow_horizontal = 2
+text = "Mouse Sensitivity - 3.33"
 
-[node name="Icon" type="TextureRect" parent="CanvasLayer/Panel/Levels/NewContainer/Level/Mask"]
-layout_mode = 0
-offset_right = 280.0
-offset_bottom = 140.0
-texture = ExtResource("7_c4qlh")
-
-[node name="LevelName" type="Label" parent="CanvasLayer/Panel/Levels/NewContainer/Level"]
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Panel/TabContainer/Settings"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.9850001
-offset_top = 157.0
-offset_bottom = -65.250015
-text = "Level Name"
-label_settings = SubResource("LabelSettings_8aat6")
+offset_left = 64.0
+offset_top = 89.0
+offset_right = -64.0
+offset_bottom = 93.0
+theme_override_styles/separator = SubResource("StyleBoxLine_1jjir")
+
+[node name="Title" type="Label" parent="CanvasLayer/Panel/TabContainer/Settings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 64.0
+text = "Settings"
+label_settings = SubResource("LabelSettings_8omcj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Play" type="Button" parent="CanvasLayer/Panel/Levels/NewContainer/Level"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 200.0
-offset_right = 290.0
-offset_bottom = 241.17647
-text = "Play"
-
-[node name="Level2" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer" node_paths=PackedStringArray("Icon", "_Name", "Play")]
-custom_minimum_size = Vector2(300, 250)
+[node name="Levels" type="Control" parent="CanvasLayer/Panel/TabContainer"]
+visible = false
 layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Panel/TabContainer/Levels"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.998
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = -22.70404
+theme_override_styles/panel = SubResource("StyleBoxFlat_c4qlh")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Panel/TabContainer/Levels"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.998
+offset_left = 68.0
+offset_top = 68.0
+offset_right = -68.0
+offset_bottom = -26.70404
+theme_override_styles/panel = SubResource("StyleBoxFlat_1jjir")
+draw_focus_border = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("8_nf3ne")
+CLP = ExtResource("11_f4www")
+lb = ExtResource("11_qmvdg")
+
+[node name="Level" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer" instance=ExtResource("11_qmvdg")]
+layout_mode = 2
+AssociatedLevel = ExtResource("3_ugn2o")
+LevelName = "Basics"
+
+[node name="Level2" type="Panel" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("Icon", "_Name", "Play")]
+clip_contents = true
+custom_minimum_size = Vector2(300, 160)
+layout_mode = 2
+size_flags_horizontal = 3
 script = ExtResource("2_8aat6")
 Icon = NodePath("Mask/Icon")
 _Name = NodePath("LevelName")
@@ -293,45 +506,83 @@ Play = NodePath("Play")
 AssociatedLevel = ExtResource("5_q8r6g")
 LevelName = "Jumping"
 
-[node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level2"]
+[node name="Mask" type="Panel" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level2"]
 clip_children = 1
 clip_contents = true
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 290.0
+offset_right = 285.28
 offset_bottom = 150.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_u7y45")
 
-[node name="Icon" type="TextureRect" parent="CanvasLayer/Panel/Levels/NewContainer/Level2/Mask"]
-layout_mode = 0
-offset_right = 280.0
-offset_bottom = 140.0
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level2/Mask"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.036000002
+anchor_top = -0.071
+anchor_right = -0.036000002
+anchor_bottom = -0.071
+offset_left = 7.5500803
+offset_top = 9.940001
+offset_right = 287.5501
+offset_bottom = 149.94
 texture = ExtResource("7_c4qlh")
 
-[node name="LevelName" type="Label" parent="CanvasLayer/Panel/Levels/NewContainer/Level2"]
+[node name="LevelName" type="Label" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level2"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.9850001
-offset_top = 157.0
-offset_bottom = -65.250015
+offset_left = 308.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 35.0
 text = "Level Name"
 label_settings = SubResource("LabelSettings_8aat6")
-horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Play" type="Button" parent="CanvasLayer/Panel/Levels/NewContainer/Level2"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 200.0
-offset_right = 290.0
-offset_bottom = 241.17647
+[node name="Play" type="Button" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -276.06403
+offset_top = -52.0
+offset_right = -12.0
+offset_bottom = -10.823532
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_4jp7k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nf3ne")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pw4oi")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ji2u7")
 text = "Play"
 
-[node name="Level3" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer" node_paths=PackedStringArray("Icon", "_Name", "Play")]
-custom_minimum_size = Vector2(300, 250)
+[node name="PB" type="Label" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -692.0
+offset_top = -48.0
+offset_right = -288.0
+offset_bottom = -13.0
+grow_vertical = 2
+text = "PB - 00:00:00"
+label_settings = SubResource("LabelSettings_4jp7k")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Level3" type="Panel" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("Icon", "_Name", "Play")]
+clip_contents = true
+custom_minimum_size = Vector2(300, 160)
 layout_mode = 2
+size_flags_horizontal = 3
 script = ExtResource("2_8aat6")
 Icon = NodePath("Mask/Icon")
 _Name = NodePath("LevelName")
@@ -339,45 +590,83 @@ Play = NodePath("Play")
 AssociatedLevel = ExtResource("9_0ujva")
 LevelName = "The Button"
 
-[node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level3"]
+[node name="Mask" type="Panel" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level3"]
 clip_children = 1
 clip_contents = true
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 290.0
+offset_right = 285.28
 offset_bottom = 150.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_u7y45")
 
-[node name="Icon" type="TextureRect" parent="CanvasLayer/Panel/Levels/NewContainer/Level3/Mask"]
-layout_mode = 0
-offset_right = 280.0
-offset_bottom = 140.0
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level3/Mask"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.036000002
+anchor_top = -0.071
+anchor_right = -0.036000002
+anchor_bottom = -0.071
+offset_left = 7.5500803
+offset_top = 9.940001
+offset_right = 287.5501
+offset_bottom = 149.94
 texture = ExtResource("7_c4qlh")
 
-[node name="LevelName" type="Label" parent="CanvasLayer/Panel/Levels/NewContainer/Level3"]
+[node name="LevelName" type="Label" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level3"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.9850001
-offset_top = 157.0
-offset_bottom = -65.250015
+offset_left = 308.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 35.0
 text = "Level Name"
 label_settings = SubResource("LabelSettings_8aat6")
-horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Play" type="Button" parent="CanvasLayer/Panel/Levels/NewContainer/Level3"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 200.0
-offset_right = 290.0
-offset_bottom = 241.17647
+[node name="Play" type="Button" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -276.06403
+offset_top = -52.0
+offset_right = -12.0
+offset_bottom = -10.823532
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_4jp7k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nf3ne")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pw4oi")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ji2u7")
 text = "Play"
 
-[node name="Level4" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer" node_paths=PackedStringArray("Icon", "_Name", "Play")]
-custom_minimum_size = Vector2(300, 250)
+[node name="PB" type="Label" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -692.0
+offset_top = -48.0
+offset_right = -288.0
+offset_bottom = -13.0
+grow_vertical = 2
+text = "PB - 00:00:00"
+label_settings = SubResource("LabelSettings_4jp7k")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Level4" type="Panel" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("Icon", "_Name", "Play")]
+clip_contents = true
+custom_minimum_size = Vector2(300, 160)
 layout_mode = 2
+size_flags_horizontal = 3
 script = ExtResource("2_8aat6")
 Icon = NodePath("Mask/Icon")
 _Name = NodePath("LevelName")
@@ -385,45 +674,83 @@ Play = NodePath("Play")
 AssociatedLevel = ExtResource("10_4jp7k")
 LevelName = "Time Flies By"
 
-[node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level4"]
+[node name="Mask" type="Panel" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level4"]
 clip_children = 1
 clip_contents = true
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 290.0
+offset_right = 285.28
 offset_bottom = 150.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_u7y45")
 
-[node name="Icon" type="TextureRect" parent="CanvasLayer/Panel/Levels/NewContainer/Level4/Mask"]
-layout_mode = 0
-offset_right = 280.0
-offset_bottom = 140.0
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level4/Mask"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.036000002
+anchor_top = -0.071
+anchor_right = -0.036000002
+anchor_bottom = -0.071
+offset_left = 7.5500803
+offset_top = 9.940001
+offset_right = 287.5501
+offset_bottom = 149.94
 texture = ExtResource("7_c4qlh")
 
-[node name="LevelName" type="Label" parent="CanvasLayer/Panel/Levels/NewContainer/Level4"]
+[node name="LevelName" type="Label" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level4"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.9850001
-offset_top = 157.0
-offset_bottom = -65.250015
+offset_left = 308.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 35.0
 text = "Level Name"
 label_settings = SubResource("LabelSettings_8aat6")
-horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Play" type="Button" parent="CanvasLayer/Panel/Levels/NewContainer/Level4"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 200.0
-offset_right = 290.0
-offset_bottom = 241.17647
+[node name="Play" type="Button" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level4"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -276.06403
+offset_top = -52.0
+offset_right = -12.0
+offset_bottom = -10.823532
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_4jp7k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nf3ne")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pw4oi")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ji2u7")
 text = "Play"
 
-[node name="Level5" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer" node_paths=PackedStringArray("Icon", "_Name", "Play")]
-custom_minimum_size = Vector2(300, 250)
+[node name="PB" type="Label" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level4"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -692.0
+offset_top = -48.0
+offset_right = -288.0
+offset_bottom = -13.0
+grow_vertical = 2
+text = "PB - 00:00:00"
+label_settings = SubResource("LabelSettings_4jp7k")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Level5" type="Panel" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("Icon", "_Name", "Play")]
+clip_contents = true
+custom_minimum_size = Vector2(300, 160)
 layout_mode = 2
+size_flags_horizontal = 3
 script = ExtResource("2_8aat6")
 Icon = NodePath("Mask/Icon")
 _Name = NodePath("LevelName")
@@ -431,43 +758,79 @@ Play = NodePath("Play")
 AssociatedLevel = ExtResource("11_nf3ne")
 LevelName = "Many Tabs Later"
 
-[node name="Mask" type="Panel" parent="CanvasLayer/Panel/Levels/NewContainer/Level5"]
+[node name="Mask" type="Panel" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level5"]
 clip_children = 1
 clip_contents = true
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 290.0
+offset_right = 285.28
 offset_bottom = 150.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_u7y45")
 
-[node name="Icon" type="TextureRect" parent="CanvasLayer/Panel/Levels/NewContainer/Level5/Mask"]
-layout_mode = 0
-offset_right = 280.0
-offset_bottom = 140.0
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level5/Mask"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.036000002
+anchor_top = -0.071
+anchor_right = -0.036000002
+anchor_bottom = -0.071
+offset_left = 7.5500803
+offset_top = 9.940001
+offset_right = 287.5501
+offset_bottom = 149.94
 texture = ExtResource("7_c4qlh")
 
-[node name="LevelName" type="Label" parent="CanvasLayer/Panel/Levels/NewContainer/Level5"]
+[node name="LevelName" type="Label" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level5"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.9850001
-offset_top = 157.0
-offset_bottom = -65.250015
+offset_left = 308.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 35.0
 text = "Level Name"
 label_settings = SubResource("LabelSettings_8aat6")
-horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Play" type="Button" parent="CanvasLayer/Panel/Levels/NewContainer/Level5"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 200.0
-offset_right = 290.0
-offset_bottom = 241.17647
+[node name="Play" type="Button" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level5"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -276.06403
+offset_top = -52.0
+offset_right = -12.0
+offset_bottom = -10.823532
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_4jp7k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nf3ne")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pw4oi")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ji2u7")
 text = "Play"
 
-[node name="Title" type="Label" parent="CanvasLayer/Panel/Levels"]
+[node name="PB" type="Label" parent="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level5"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -692.0
+offset_top = -48.0
+offset_right = -288.0
+offset_bottom = -13.0
+grow_vertical = 2
+text = "PB - 00:00:00"
+label_settings = SubResource("LabelSettings_4jp7k")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="CanvasLayer/Panel/TabContainer/Levels"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -480,8 +843,10 @@ label_settings = SubResource("LabelSettings_8omcj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Controls" parent="CanvasLayer/Panel" instance=ExtResource("9_ujvk5")]
-layout_mode = 1
+[node name="Controls" parent="CanvasLayer/Panel/TabContainer" instance=ExtResource("9_ujvk5")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/Panel"]
 layout_mode = 1
@@ -512,12 +877,14 @@ label_settings = SubResource("LabelSettings_xuqax")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[connection signal="pressed" from="CanvasLayer/Panel/MainMenu/VBoxContainer/Play" to="CanvasLayer/Panel/MainMenu/VBoxContainer" method="LevelMenu"]
-[connection signal="pressed" from="CanvasLayer/Panel/MainMenu/VBoxContainer/Watch Demos" to="CanvasLayer/Panel/MainMenu/VBoxContainer" method="Demo"]
-[connection signal="pressed" from="CanvasLayer/Panel/MainMenu/VBoxContainer/Controls" to="CanvasLayer/Panel/MainMenu/VBoxContainer" method="Controls"]
-[connection signal="pressed" from="CanvasLayer/Panel/MainMenu/VBoxContainer/Quit" to="CanvasLayer/Panel/MainMenu/VBoxContainer" method="Quit"]
-[connection signal="pressed" from="CanvasLayer/Panel/Levels/NewContainer/Level/Play" to="CanvasLayer/Panel/Levels/NewContainer/Level" method="pressed"]
-[connection signal="pressed" from="CanvasLayer/Panel/Levels/NewContainer/Level2/Play" to="CanvasLayer/Panel/Levels/NewContainer/Level2" method="pressed"]
-[connection signal="pressed" from="CanvasLayer/Panel/Levels/NewContainer/Level3/Play" to="CanvasLayer/Panel/Levels/NewContainer/Level3" method="pressed"]
-[connection signal="pressed" from="CanvasLayer/Panel/Levels/NewContainer/Level4/Play" to="CanvasLayer/Panel/Levels/NewContainer/Level4" method="pressed"]
-[connection signal="pressed" from="CanvasLayer/Panel/Levels/NewContainer/Level5/Play" to="CanvasLayer/Panel/Levels/NewContainer/Level5" method="pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer/Play" to="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer" method="LevelMenu"]
+[connection signal="pressed" from="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer/Settings" to="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer" method="Settings"]
+[connection signal="pressed" from="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer/Watch Demos" to="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer" method="Demo"]
+[connection signal="pressed" from="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer/Level Editor" to="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer" method="LevelEditor"]
+[connection signal="pressed" from="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer/Controls" to="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer" method="Controls"]
+[connection signal="pressed" from="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer/Quit" to="CanvasLayer/Panel/TabContainer/MainMenu/VBoxContainer" method="Quit"]
+[connection signal="value_changed" from="CanvasLayer/Panel/TabContainer/Settings/Panel/TabContainer/Controls/VBoxContainer/MouseSensitivity" to="CanvasLayer/Panel/TabContainer/Settings" method="MouseSens"]
+[connection signal="pressed" from="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level2/Play" to="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level2" method="pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level3/Play" to="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level3" method="pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level4/Play" to="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level4" method="pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level5/Play" to="CanvasLayer/Panel/TabContainer/Levels/ScrollContainer/VBoxContainer/Level5" method="pressed"]

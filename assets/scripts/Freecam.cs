@@ -36,6 +36,8 @@ public partial class Freecam : Node3D
     public float MaxZoom = 15f;
     public float MinZoom = 1f;
     public float ZoomStep = 0.25f;
+    private SaveData Save;
+    public float SENSITIVITY = 3f;
     (Godot.Collections.Array<Vector4> Platforms, float[] times, string Level, Godot.Collections.Array<Vector3> Poss, Godot.Collections.Array<Vector3> Vels) b;
     public override void _Input(InputEvent @event)
     {
@@ -43,7 +45,7 @@ public partial class Freecam : Node3D
         {
             if (Input.IsActionPressed("RC")) {
                 Input.MouseMode = Input.MouseModeEnum.Captured;
-                MouseVel += mouse.Relative * 0.025f;
+                MouseVel = mouse.Relative * (SENSITIVITY/10.0f);
             } else
             {
                 Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -72,10 +74,21 @@ public partial class Freecam : Node3D
                 e.QueueFree();
             }
         }
-        PackedScene Map = ResourceLoader.Load<PackedScene>($"res://assets/scenes/Levels/{name}.tscn");
-        Node3D Scene = Map.Instantiate<Node3D>();
-        if (IsInstanceValid(Scene.GetNodeOrNull<Player>("Player"))) Scene.GetNodeOrNull<Player>("Player").enabled = false;
-        LevelGroup.AddChild(Scene);
+        if (!name.StartsWith("COM_")) {
+            PackedScene Map = ResourceLoader.Load<PackedScene>($"res://assets/scenes/Levels/{name}.tscn");
+            Node3D Scene = Map.Instantiate<Node3D>();
+            if (IsInstanceValid(Scene.GetNodeOrNull<Player>("Player"))) Scene.GetNodeOrNull<Player>("Player").enabled = false;
+            LevelGroup.AddChild(Scene);
+        }
+        else
+        {
+            string LevelName = name.Replace("COM_","");
+            PackedScene Map = ResourceLoader.Load<PackedScene>("res://assets/scenes/CommunityLevelPlayer.tscn");
+            CommunityLevelPlayer Scene = Map.Instantiate<CommunityLevelPlayer>();
+            Scene.LevelHandle = name;
+            if (IsInstanceValid(Scene.GetNodeOrNull<Player>("Player"))) Scene.GetNodeOrNull<Player>("Player").enabled = false;
+            LevelGroup.AddChild(Scene);
+        }
     }
     int[] PlatformTicks;
     public void Selec(int index)
@@ -90,6 +103,8 @@ public partial class Freecam : Node3D
     public override void _Ready()
     {
         Pause();
+        Save = SaveFile.Read();
+        SENSITIVITY = (float)Save.Settings.MouseSens;
         base._Ready();
         foreach (string item in Demo.GetDemos()) {
             Options.AddItem(item.Split(".ADT")[0]);

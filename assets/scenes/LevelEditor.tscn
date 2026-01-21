@@ -1,0 +1,976 @@
+[gd_scene load_steps=61 format=3 uid="uid://cy6iaccatj1dy"]
+
+[ext_resource type="Script" uid="uid://4l82yuwlemm5" path="res://assets/scripts/LightPlatform.cs" id="1_tsbh4"]
+[ext_resource type="AudioStream" uid="uid://cemwbfsjlkkud" path="res://assets/Audio/place.wav" id="2_jv2mw"]
+[ext_resource type="AudioStream" uid="uid://dk4gld3l402xh" path="res://assets/Audio/dissapear.wav" id="3_5psu0"]
+[ext_resource type="Script" uid="uid://klv538hrx8dp" path="res://assets/scripts/LevelEditor.cs" id="4_fgpen"]
+[ext_resource type="AudioStream" uid="uid://dhct6367sbfu8" path="res://assets/UI/LevelEditor/Audio/resize.mp3" id="5_tsbh4"]
+[ext_resource type="AudioStream" uid="uid://bk1wai46al2ql" path="res://assets/UI/LevelEditor/Audio/select.mp3" id="6_3ow5t"]
+[ext_resource type="AudioStream" uid="uid://blc2m7eiwpdke" path="res://assets/UI/LevelEditor/Audio/select1.mp3" id="7_p42ub"]
+[ext_resource type="Shader" uid="uid://vea6nysxmwhc" path="res://assets/visuals/basd.gdshader" id="7_qthon"]
+[ext_resource type="ArrayMesh" uid="uid://drfd56i8nr4h" path="res://assets/UI/LevelEditor/Visuals/circle.obj" id="7_tf820"]
+[ext_resource type="AudioStream" uid="uid://coskywphnl6xx" path="res://assets/UI/LevelEditor/Audio/select3.mp3" id="8_2c1tm"]
+[ext_resource type="Theme" uid="uid://ba5dhns3igvhd" path="res://assets/visuals/Theme.tres" id="8_3ow5t"]
+[ext_resource type="Texture2D" uid="uid://by8q5wykmfid4" path="res://assets/UI/LevelEditor/Visuals/Scale.png" id="8_jv2mw"]
+[ext_resource type="Texture2D" uid="uid://dvlxmco535mo0" path="res://assets/UI/LevelEditor/Visuals/Position.png" id="9_5psu0"]
+[ext_resource type="ArrayMesh" uid="uid://dusxl03igfn1d" path="res://assets/UI/LevelEditor/Visuals/arrow.obj" id="10_5psu0"]
+[ext_resource type="PackedScene" uid="uid://si5ae1cdebn6" path="res://assets/scenes/Platform.tscn" id="12_3bja3"]
+[ext_resource type="Texture2D" uid="uid://b1ic540m4v6cj" path="res://assets/UI/LevelEditor/Visuals/Save.png" id="13_kndc6"]
+[ext_resource type="Texture2D" uid="uid://cjnc2v4sjkt13" path="res://assets/UI/LevelEditor/Visuals/Select.png" id="14_flfv2"]
+[ext_resource type="Texture2D" uid="uid://crid86eejdr7b" path="res://assets/UI/LevelEditor/Visuals/Load.png" id="14_qthon"]
+[ext_resource type="Script" uid="uid://d3ncyr3c3lmo1" path="res://assets/scripts/ItemSpawner.cs" id="18_2c1tm"]
+[ext_resource type="Texture2D" uid="uid://7oayfrgvjke7" path="res://assets/UI/LevelEditor/Visuals/Player.png" id="19_fg6bj"]
+[ext_resource type="PackedScene" uid="uid://elhlb7eqijrl" path="res://assets/scenes/Finish.tscn" id="19_ijydt"]
+[ext_resource type="Shader" uid="uid://n2258pheagdc" path="res://assets/visuals/Grid.gdshader" id="20_yc3jh"]
+[ext_resource type="Texture2D" uid="uid://dxl714xttko7h" path="res://assets/UI/LevelEditor/Visuals/ItemBar/platform.png" id="21_67uw6"]
+[ext_resource type="Texture2D" uid="uid://bbmabaagso7wo" path="res://assets/UI/LevelEditor/Visuals/ItemBar/checkpoint.png" id="21_dm71f"]
+[ext_resource type="PackedScene" uid="uid://drlyngpdublbh" path="res://assets/scenes/ERORRPOPUP.tscn" id="21_ieh6q"]
+
+[sub_resource type="Environment" id="Environment_bvxot"]
+background_mode = 1
+background_color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0tk4"]
+transparency = 1
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(1, 1, 1, 0.12156863)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i3dh0"]
+material = SubResource("StandardMaterial3D_a0tk4")
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cc3bd"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_31ged"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dwiow"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a0tk4"]
+render_priority = 0
+shader = ExtResource("7_qthon")
+shader_parameter/edge_color = Color(0.49803922, 0.49803922, 0.49803922, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_v74c1"]
+material = SubResource("ShaderMaterial_a0tk4")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jv2mw"]
+bg_color = Color(0, 0, 0, 0.6666667)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_jv2mw"]
+font_size = 10
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_jv2mw"]
+color = Color(1, 1, 1, 0.49803922)
+grow_begin = -13.0
+grow_end = -13.0
+thickness = 3
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5psu0"]
+bg_color = Color(0, 0, 0, 0.6666667)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_3ow5t"]
+color = Color(1, 1, 1, 0.09803922)
+grow_begin = 5.0
+grow_end = 5.0
+thickness = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_r4cr7"]
+font_size = 23
+
+[sub_resource type="Gradient" id="Gradient_gl5s2"]
+offsets = PackedFloat32Array(0.5, 1)
+colors = PackedColorArray(0, 0, 0, 0.49803922, 0, 0, 0, 0.6666667)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0hrit"]
+gradient = SubResource("Gradient_gl5s2")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0304o"]
+texture = SubResource("GradientTexture2D_0hrit")
+
+[sub_resource type="LabelSettings" id="LabelSettings_bmohv"]
+font_size = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2sjgs"]
+bg_color = Color(0, 0, 0, 0.2)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_b32kl"]
+font_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p42ub"]
+bg_color = Color(0, 0, 0, 0.6666667)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgpen"]
+transparency = 1
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+albedo_color = Color(1, 1, 1, 0.078431375)
+grow = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_jv2mw"]
+material = SubResource("StandardMaterial3D_fgpen")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jv2mw"]
+transparency = 1
+shading_mode = 0
+specular_mode = 2
+albedo_color = Color(1, 0, 0, 0.49800003)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tf820"]
+material = SubResource("StandardMaterial3D_jv2mw")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i8pwi"]
+size = Vector3(0.7, 0.7, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5psu0"]
+render_priority = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(1, 0.3491902, 0.3491902, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tf820"]
+render_priority = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(0.5370987, 1, 0.3491902, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3bja3"]
+render_priority = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(0.24780053, 0.5370987, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yc3jh"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_texture = ExtResource("19_fg6bj")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_ijydt"]
+material = SubResource("StandardMaterial3D_yc3jh")
+size = Vector2(2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ieh6q"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0.5847179, 0.5847179, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_67uw6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ijydt"]
+render_priority = 0
+shader = ExtResource("20_yc3jh")
+
+[sub_resource type="QuadMesh" id="QuadMesh_flfv2"]
+size = Vector2(150, 150)
+orientation = 1
+
+[node name="LevelEditor" type="Node3D"]
+
+[node name="DO NOT REMOVE BELOW" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bvxot")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10000, 0)
+visible = false
+mesh = SubResource("BoxMesh_i3dh0")
+
+[node name="LightPlatform" type="StaticBody3D" parent="." node_paths=PackedStringArray("mesh", "SFX")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10000, 0)
+script = ExtResource("1_tsbh4")
+LifeTime = 5.0
+mat = SubResource("StandardMaterial3D_cc3bd")
+mesh = NodePath("MeshInstance3D2")
+SFX = NodePath("SFX")
+Place = ExtResource("2_jv2mw")
+Dissapear = ExtResource("3_5psu0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="LightPlatform"]
+mesh = SubResource("BoxMesh_31ged")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LightPlatform"]
+shape = SubResource("BoxShape3D_dwiow")
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="LightPlatform"]
+stream = ExtResource("2_jv2mw")
+
+[node name="x" type="Node3D" parent="." node_paths=PackedStringArray("Cam", "yBone", "PauseMenu", "contr", "NormalMenu", "SFX", "UISFX", "TimeLabel", "LevelGroup", "Selector", "Desired", "Delete", "CheckpointUI", "ReplenisherUI", "ReplenishAmount", "PlayerUI", "PlatformsAmount", "PosBox", "SclBox", "InspectElements", "PosXInput", "PosYInput", "PosZInput", "SclXInput", "SclYInput", "SclZInput", "pop", "error", "X", "Y", "Z")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.6, 0)
+script = ExtResource("4_fgpen")
+Cam = NodePath("y/Camera3D")
+yBone = NodePath("y")
+PauseMenu = NodePath("y/Camera3D/CanvasLayer/Control/PauseMenu")
+contr = NodePath("y/Camera3D/CanvasLayer/Control/PauseMenu/Controls")
+NormalMenu = NodePath("y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu")
+SFX = NodePath("y/AudioStreamPlayer")
+UISFX = NodePath("y/UI")
+ReSize = ExtResource("5_tsbh4")
+SeLect = ExtResource("6_3ow5t")
+SeLect_2 = ExtResource("7_p42ub")
+SeLect_3 = ExtResource("8_2c1tm")
+TimeLabel = NodePath("y/Camera3D/CanvasLayer/Control/Time")
+LevelGroup = NodePath("../Level")
+Selector = NodePath("../Selector")
+Desired = NodePath("../Desired")
+UIArrow = ExtResource("10_5psu0")
+UISphere = ExtResource("7_tf820")
+PlatformScene = ExtResource("12_3bja3")
+CheckpointScene = ExtResource("19_ijydt")
+Delete = NodePath("y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Delete")
+CheckpointUI = NodePath("y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Checkpoint")
+ReplenisherUI = NodePath("y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Checkpoint/IGNORE")
+ReplenishAmount = NodePath("y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Checkpoint/Replenish Amount/Amount")
+PlayerUI = NodePath("y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Player")
+PlatformsAmount = NodePath("y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Player/Replenish Amount/Amount")
+PosBox = NodePath("y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Position")
+SclBox = NodePath("y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Scale")
+InspectElements = NodePath("y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer")
+PosXInput = NodePath("y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Position/X")
+PosYInput = NodePath("y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Position/Y")
+PosZInput = NodePath("y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Position/Z")
+SclXInput = NodePath("y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Scale/X")
+SclYInput = NodePath("y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Scale/Y")
+SclZInput = NodePath("y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Scale/Z")
+pop = NodePath("../FileDialog")
+error = NodePath("y/Camera3D/CanvasLayer/Control/ERROR")
+X = NodePath("../Markers/X")
+Y = NodePath("../Markers/Y")
+Z = NodePath("../Markers/Z")
+
+[node name="y" type="Node3D" parent="x"]
+
+[node name="Camera3D" type="Camera3D" parent="x/y"]
+current = true
+fov = 100.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="x/y/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
+mesh = SubResource("QuadMesh_v74c1")
+skeleton = NodePath("../../../../..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="x/y/Camera3D"]
+
+[node name="Control" type="Control" parent="x/y/Camera3D/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("8_3ow5t")
+
+[node name="IGNORE" type="Button" parent="x/y/Camera3D/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+flat = true
+
+[node name="Toolbar" type="Panel" parent="x/y/Camera3D/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 96.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jv2mw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Position" type="VBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="IGNORE" type="Button" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer/Position"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_type_variation = &"InverseButton"
+icon = ExtResource("9_5psu0")
+expand_icon = true
+
+[node name="Label" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer/Position"]
+layout_mode = 2
+text = "POSITION"
+label_settings = SubResource("LabelSettings_jv2mw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Scale" type="VBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="IGNORE" type="Button" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer/Scale"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_type_variation = &"InverseButton"
+icon = ExtResource("8_jv2mw")
+expand_icon = true
+
+[node name="Label" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer/Scale"]
+layout_mode = 2
+text = "SCALE"
+label_settings = SubResource("LabelSettings_jv2mw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Selector" type="VBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="IGNORE" type="Button" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer/Selector"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_type_variation = &"InverseButton"
+icon = ExtResource("14_flfv2")
+expand_icon = true
+
+[node name="Label" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer/Selector"]
+layout_mode = 2
+text = "SELECT"
+label_settings = SubResource("LabelSettings_jv2mw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_jv2mw")
+
+[node name="Save" type="VBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="IGNORE" type="Button" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer/Save"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_type_variation = &"InverseButton"
+icon = ExtResource("13_kndc6")
+expand_icon = true
+
+[node name="Label" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer/Save"]
+layout_mode = 2
+text = "SAVE"
+label_settings = SubResource("LabelSettings_jv2mw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Load" type="VBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="IGNORE" type="Button" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer/Load"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_type_variation = &"InverseButton"
+icon = ExtResource("14_qthon")
+expand_icon = true
+
+[node name="Label" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer/Load"]
+layout_mode = 2
+text = "LOAD"
+label_settings = SubResource("LabelSettings_jv2mw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InspectMenu" type="Panel" parent="x/y/Camera3D/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -312.0
+offset_top = 104.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5psu0")
+
+[node name="Label" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -1.0
+offset_bottom = 28.0
+grow_horizontal = 2
+text = "Inspector"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 28.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+draw_focus_border = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="HSeparator3" type="HSeparator" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_3ow5t")
+
+[node name="Position" type="HBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Position"]
+layout_mode = 2
+text = "Position "
+
+[node name="X" type="SpinBox" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Position"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9999.0
+max_value = 9999.0
+step = 0.1
+
+[node name="Y" type="SpinBox" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Position"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9999.0
+max_value = 9999.0
+step = 0.1
+
+[node name="Z" type="SpinBox" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Position"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -9999.0
+max_value = 9999.0
+step = 0.1
+
+[node name="Scale" type="HBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Scale"]
+layout_mode = 2
+text = "Scale "
+
+[node name="X" type="SpinBox" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Scale"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.5
+max_value = 9999.0
+step = 0.5
+value = 0.5
+
+[node name="Y" type="SpinBox" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Scale"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.5
+max_value = 9999.0
+step = 0.5
+value = 0.5
+
+[node name="Z" type="SpinBox" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Scale"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.5
+max_value = 9999.0
+step = 0.5
+value = 0.5
+
+[node name="Checkpoint" type="VBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Checkpoint"]
+layout_mode = 2
+text = "Checkpoint"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator2" type="HSeparator" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Checkpoint"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_3ow5t")
+
+[node name="IGNORE" type="CheckBox" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Checkpoint"]
+layout_mode = 2
+text = "Replenisher Only"
+flat = true
+
+[node name="Replenish Amount" type="HBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Checkpoint"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Checkpoint/Replenish Amount"]
+layout_mode = 2
+text = "Replenish Amount "
+
+[node name="Amount" type="SpinBox" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Checkpoint/Replenish Amount"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 999.0
+
+[node name="Player" type="VBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Player"]
+layout_mode = 2
+text = "Player"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSeparator2" type="HSeparator" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Player"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_3ow5t")
+
+[node name="Replenish Amount" type="HBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Player"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Player/Replenish Amount"]
+layout_mode = 2
+text = "Light Platforms "
+
+[node name="Amount" type="SpinBox" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Player/Replenish Amount"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 999.0
+
+[node name="Delete" type="VBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="HSeparator2" type="HSeparator" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Delete"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_3ow5t")
+
+[node name="IGNORE" type="Button" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Delete"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 8
+theme_type_variation = &"InverseButton"
+text = "Duplicate"
+
+[node name="IGNORE2" type="Button" parent="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Delete"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 8
+theme_type_variation = &"RedButton"
+text = "Delete"
+
+[node name="Time" type="Label" parent="x/y/Camera3D/CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -504.0
+offset_top = 168.0
+offset_right = -256.0
+offset_bottom = 200.0
+grow_horizontal = 0
+text = "00:00.00"
+label_settings = SubResource("LabelSettings_r4cr7")
+horizontal_alignment = 2
+
+[node name="PauseMenu" type="Panel" parent="x/y/Camera3D/CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_0304o")
+
+[node name="NormalMenu" type="Control" parent="x/y/Camera3D/CanvasLayer/Control/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.49400002
+anchor_right = 0.5
+anchor_bottom = 0.49400002
+offset_left = -576.0
+offset_top = -320.112
+offset_right = 576.0
+offset_bottom = -128.112
+text = "Paused"
+label_settings = SubResource("LabelSettings_bmohv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.49400002
+anchor_right = 0.5
+anchor_bottom = 0.49400002
+offset_left = -152.0
+offset_top = -120.112
+offset_right = 152.0
+offset_bottom = 231.888
+alignment = 1
+
+[node name="Restart2" type="Button" parent="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Restart"
+
+[node name="Controls" type="Button" parent="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Controls"
+
+[node name="MM" type="Button" parent="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Quit to Main Menu"
+
+[node name="Quit" type="Button" parent="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Quit"
+
+[node name="Controls" type="Control" parent="x/y/Camera3D/CanvasLayer/Control/PauseMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="x/y/Camera3D/CanvasLayer/Control/PauseMenu/Controls"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.98800004
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = -16.223999
+theme_override_styles/panel = SubResource("StyleBoxFlat_2sjgs")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="x/y/Camera3D/CanvasLayer/Control/PauseMenu/Controls/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+bbcode_enabled = true
+text = "[font_size=25]R - Restart
+
+Tab - Go Back to Checkpoint
+
+ESC - Pause
+
+W/A/S/D - Movement
+
+Right Click - Prepare to Place
+
+Left Click - Place Light Platform
+
+Ctrl - Crouch
+
+Space - Jump"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/PauseMenu/Controls"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 64.0
+text = "Controls"
+label_settings = SubResource("LabelSettings_b32kl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="x/y/Camera3D/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -144.0
+offset_right = -320.0
+offset_bottom = -8.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_p42ub")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="x/y/Camera3D/CanvasLayer/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+draw_focus_border = true
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Platform" type="VBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/Panel/ScrollContainer/HBoxContainer" node_paths=PackedStringArray("LevelEditor", "LevelGroup")]
+layout_mode = 2
+script = ExtResource("18_2c1tm")
+LevelEditor = NodePath("../../../../../../../..")
+LevelGroup = NodePath("../../../../../../../../../Level")
+AssociatedItem = ExtResource("12_3bja3")
+
+[node name="IGNORE" type="Button" parent="x/y/Camera3D/CanvasLayer/Control/Panel/ScrollContainer/HBoxContainer/Platform"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"InverseButton"
+icon = ExtResource("21_67uw6")
+expand_icon = true
+
+[node name="Label" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/Panel/ScrollContainer/HBoxContainer/Platform"]
+layout_mode = 2
+text = "PLATFORM"
+label_settings = SubResource("LabelSettings_jv2mw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Checkpoint" type="VBoxContainer" parent="x/y/Camera3D/CanvasLayer/Control/Panel/ScrollContainer/HBoxContainer" node_paths=PackedStringArray("LevelEditor", "LevelGroup")]
+layout_mode = 2
+script = ExtResource("18_2c1tm")
+LevelEditor = NodePath("../../../../../../../..")
+LevelGroup = NodePath("../../../../../../../../../Level")
+AssociatedItem = ExtResource("19_ijydt")
+type = 1
+
+[node name="IGNORE" type="Button" parent="x/y/Camera3D/CanvasLayer/Control/Panel/ScrollContainer/HBoxContainer/Checkpoint"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"InverseButton"
+icon = ExtResource("21_dm71f")
+expand_icon = true
+
+[node name="Label" type="Label" parent="x/y/Camera3D/CanvasLayer/Control/Panel/ScrollContainer/HBoxContainer/Checkpoint"]
+layout_mode = 2
+text = "CHECKPOINT"
+label_settings = SubResource("LabelSettings_jv2mw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ERROR" parent="x/y/Camera3D/CanvasLayer/Control" instance=ExtResource("21_ieh6q")]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="x/y"]
+stream = ExtResource("5_tsbh4")
+volume_db = -5.0
+
+[node name="UI" type="AudioStreamPlayer" parent="x/y"]
+volume_db = -10.0
+pitch_scale = 0.8
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="Platforms" type="Node3D" parent="Level"]
+
+[node name="StaticBody3D" parent="Level/Platforms" instance=ExtResource("12_3bja3")]
+transform = Transform3D(3, 0, 0, 0, 0.5, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="Checkpoints" type="Node3D" parent="Level"]
+
+[node name="FINISH" parent="Level/Checkpoints" instance=ExtResource("19_ijydt")]
+transform = Transform3D(2.5, 0, 0, 0, 0.5, 0, 0, 0, 2.5, -4, 0.1, 0)
+ineditor = true
+
+[node name="Selector" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_jv2mw")
+
+[node name="Desired" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_tf820")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.7071068, -3.090862e-08, 0.7071068, -0.7071068, -3.090862e-08, 0.7071068, 0, -1, -4.3711392e-08, 0, 0, 0)
+
+[node name="Markers" type="Node3D" parent="."]
+
+[node name="X" type="Node3D" parent="Markers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9999, 0)
+visible = false
+
+[node name="Area3D" type="Area3D" parent="Markers/X"]
+collision_layer = 32768
+collision_mask = 32769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Markers/X/Area3D"]
+shape = SubResource("BoxShape3D_i8pwi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Markers/X"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_5psu0")
+mesh = ExtResource("7_tf820")
+surface_material_override/0 = SubResource("StandardMaterial3D_5psu0")
+
+[node name="Y" type="Node3D" parent="Markers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9999, 0)
+visible = false
+
+[node name="Area3D" type="Area3D" parent="Markers/Y"]
+collision_layer = 32768
+collision_mask = 32769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Markers/Y/Area3D"]
+shape = SubResource("BoxShape3D_i8pwi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Markers/Y"]
+material_override = SubResource("StandardMaterial3D_tf820")
+mesh = ExtResource("7_tf820")
+
+[node name="Z" type="Node3D" parent="Markers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9999, 0)
+visible = false
+
+[node name="Area3D" type="Area3D" parent="Markers/Z"]
+collision_layer = 32768
+collision_mask = 32769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Markers/Z/Area3D"]
+shape = SubResource("BoxShape3D_i8pwi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Markers/Z"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_3bja3")
+mesh = ExtResource("7_tf820")
+surface_material_override/0 = SubResource("StandardMaterial3D_3bja3")
+
+[node name="FileDialog" type="FileDialog" parent="."]
+transparent_bg = true
+oversampling_override = 1.0
+title = "Open a File"
+position = Vector2i(0, 36)
+transparent = true
+theme = ExtResource("8_3ow5t")
+file_mode = 0
+display_mode = 1
+access = 1
+filters = PackedStringArray("*.AMF")
+hidden_files_toggle_enabled = false
+favorites_enabled = false
+recent_list_enabled = false
+layout_toggle_enabled = false
+
+[node name="PLAYER" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="PLAYER"]
+mesh = SubResource("QuadMesh_ijydt")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="PLAYER/MeshInstance3D3"]
+transform = Transform3D(-2.1855694e-08, -1, 0, 0.5, -4.371139e-08, 0, 0, 0, 1, -1, 0, 0)
+mesh = ExtResource("10_5psu0")
+surface_material_override/0 = SubResource("StandardMaterial3D_ieh6q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PLAYER"]
+shape = SubResource("BoxShape3D_67uw6")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_ijydt")
+mesh = SubResource("QuadMesh_flfv2")
+
+[connection signal="finished" from="LightPlatform/SFX" to="LightPlatform" method="finish"]
+[connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer/Position/IGNORE" to="x" method="Select" binds= [1]]
+[connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer/Scale/IGNORE" to="x" method="Select" binds= [0]]
+[connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer/Selector/IGNORE" to="x" method="Select" binds= [-1]]
+[connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer/Save/IGNORE" to="x" method="SaveLevel"]
+[connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/Toolbar/HBoxContainer/Load/IGNORE" to="x" method="LoadLevel"]
+[connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Checkpoint/IGNORE" to="x" method="ReplenisherToggled"]
+[connection signal="value_changed" from="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Checkpoint/Replenish Amount/Amount" to="x" method="ReplenishVal"]
+[connection signal="value_changed" from="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Player/Replenish Amount/Amount" to="x" method="ReplenishVal"]
+[connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Delete/IGNORE" to="x" method="Duplicate"]
+[connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/InspectMenu/ScrollContainer/VBoxContainer/Delete/IGNORE2" to="x" method="DeleteSelected"]
+[connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/Restart2" to="x" method="Restart"]
+[connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/Controls" to="x" method="Controls"]
+[connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/MM" to="x" method="MainMenu"]
+[connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/Quit" to="x" method="Quit"]
+[connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/Panel/ScrollContainer/HBoxContainer/Platform/IGNORE" to="x/y/Camera3D/CanvasLayer/Control/Panel/ScrollContainer/HBoxContainer/Platform" method="Spawn"]
+[connection signal="pressed" from="x/y/Camera3D/CanvasLayer/Control/Panel/ScrollContainer/HBoxContainer/Checkpoint/IGNORE" to="x/y/Camera3D/CanvasLayer/Control/Panel/ScrollContainer/HBoxContainer/Checkpoint" method="Spawn"]
+[connection signal="canceled" from="FileDialog" to="x" method="EndDialog"]
+[connection signal="confirmed" from="FileDialog" to="x" method="EndDialog"]
+[connection signal="visibility_changed" from="FileDialog" to="x" method="EndDialog"]

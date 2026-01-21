@@ -1,0 +1,63 @@
+[gd_scene load_steps=12 format=3 uid="uid://elhlb7eqijrl"]
+
+[ext_resource type="Script" uid="uid://clw5yfm1yhaqx" path="res://assets/scripts/Finish.cs" id="1_uvmrn"]
+[ext_resource type="Texture2D" uid="uid://c5va1u8oyf2dx" path="res://assets/UI/LevelEditor/Visuals/Finish.png" id="2_2ohdm"]
+[ext_resource type="Texture2D" uid="uid://dv3s6i0lsdn26" path="res://assets/UI/LevelEditor/Visuals/Checkpoint.png" id="2_ruplj"]
+[ext_resource type="Texture2D" uid="uid://bkrdxfi45rmba" path="res://assets/UI/LevelEditor/Visuals/Replenisher.png" id="3_ubh5x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uvmrn"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ohdm"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4dysh"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dm71f"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_texture = ExtResource("2_2ohdm")
+billboard_mode = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_flfv2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ieh6q"]
+material = SubResource("StandardMaterial3D_uvmrn")
+
+[sub_resource type="QuadMesh" id="QuadMesh_n34pj"]
+material = SubResource("StandardMaterial3D_dm71f")
+size = Vector2(2, 2)
+
+[node name="Checkpoint" type="Area3D"]
+script = ExtResource("1_uvmrn")
+CheckpointMat = SubResource("StandardMaterial3D_uvmrn")
+ReplenisherMat = SubResource("StandardMaterial3D_2ohdm")
+FinishMat = SubResource("StandardMaterial3D_4dysh")
+CheckpointImg = ExtResource("2_ruplj")
+ReplenisherImg = ExtResource("3_ubh5x")
+FinishImg = ExtResource("2_2ohdm")
+FinishLine = true
+ReplenishLight = 0
+bilboard = SubResource("StandardMaterial3D_dm71f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_flfv2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ieh6q")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("QuadMesh_n34pj")
+
+[connection signal="body_entered" from="." to="." method="Collided"]

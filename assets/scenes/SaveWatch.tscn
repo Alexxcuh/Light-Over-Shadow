@@ -1,13 +1,13 @@
 [gd_scene load_steps=60 format=4 uid="uid://bcbos2sqw1jd0"]
 
 [ext_resource type="Script" uid="uid://btdwxqse64pbr" path="res://assets/scripts/LightPlatformReplay.cs" id="1_uivg0"]
-[ext_resource type="AudioStream" uid="uid://cemwbfsjlkkud" path="res://assets/visuals/place.wav" id="4_tufgn"]
-[ext_resource type="AudioStream" uid="uid://dk4gld3l402xh" path="res://assets/visuals/dissapear.wav" id="5_bwps1"]
+[ext_resource type="AudioStream" uid="uid://cemwbfsjlkkud" path="res://assets/Audio/place.wav" id="4_tufgn"]
+[ext_resource type="AudioStream" uid="uid://dk4gld3l402xh" path="res://assets/Audio/dissapear.wav" id="5_bwps1"]
 [ext_resource type="Shader" uid="uid://vea6nysxmwhc" path="res://assets/visuals/basd.gdshader" id="5_kybur"]
 [ext_resource type="Script" uid="uid://daj3syekpjuks" path="res://assets/scripts/Freecam.cs" id="5_tufgn"]
 [ext_resource type="Theme" uid="uid://ba5dhns3igvhd" path="res://assets/visuals/Theme.tres" id="6_tufgn"]
-[ext_resource type="Texture2D" uid="uid://jym63hgvr5r6" path="res://assets/visuals/Timeline/play.svg" id="6_uivg0"]
-[ext_resource type="Texture2D" uid="uid://bkyd37k3xfng6" path="res://assets/visuals/Timeline/pause.svg" id="7_mk5td"]
+[ext_resource type="Texture2D" uid="uid://jym63hgvr5r6" path="res://assets/UI/Timeline/play.svg" id="6_uivg0"]
+[ext_resource type="Texture2D" uid="uid://bkyd37k3xfng6" path="res://assets/UI/Timeline/pause.svg" id="7_mk5td"]
 
 [sub_resource type="Environment" id="Environment_bvxot"]
 background_mode = 1

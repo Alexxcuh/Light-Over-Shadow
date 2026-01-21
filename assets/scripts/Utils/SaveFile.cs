@@ -2,57 +2,68 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Godot;
 using LOSUtils;
-
-public static class SaveFile
-{
-    public static void CheckFolder()
+namespace LOSUtils {
+    public static class SaveFile
     {
-        using var dir = DirAccess.Open("user://");
-        if (!dir.DirExists("Save"))
-            dir.MakeDir("Save");
-    }
-
-    public static void Save(Player player)
-    {
-        CheckFolder();
-
-        LevelData data;
-
-        if (FileAccess.FileExists("user://Save/player.AST"))
+        public static void CheckFolder()
         {
-            using var r = FileAccess.Open("user://Save/player.AST", FileAccess.ModeFlags.Read);
-            var txt = r.GetAsText();
-            data = JsonSerializer.Deserialize<LevelData>(txt) ?? new LevelData();
-        }
-        else
-        {
-            data = new LevelData();
+            using var dir = DirAccess.Open("user://");
+            if (!dir.DirExists("Save"))
+                dir.MakeDir("Save");
         }
 
-        data.Levels ??= new Dictionary<string, LevelInfo>();
-
-        data.Levels[player.RootScene.Name] = new LevelInfo
+        public static void Save(Player player)
         {
-            Time = player.Time
-        };
+            CheckFolder();
 
-        using var w = FileAccess.Open("user://Save/player.AST", FileAccess.ModeFlags.Write);
-        w.StoreString(JsonSerializer.Serialize(data));
-        w.Flush();
-        w.Close();
-    }
+            SaveData data;
 
-    public static LevelData Read()
-    {
-        CheckFolder();
+            if (FileAccess.FileExists("user://Save/player.AST"))
+            {
+                using var r = FileAccess.Open("user://Save/player.AST", FileAccess.ModeFlags.Read);
+                var txt = r.GetAsText();
+                data = JsonSerializer.Deserialize<SaveData>(txt) ?? new SaveData();
+            }
+            else
+            {
+                data = new SaveData();
+            }
 
-        if (!FileAccess.FileExists("user://Save/player.AST"))
-            return new LevelData();
+            data.Levels ??= new Dictionary<string, LevelInfo>();
 
-        using var file = FileAccess.Open("user://Save/player.AST", FileAccess.ModeFlags.Read);
-        var json = file.GetAsText();
-        file.Close();
+            data.Levels[player.RootScene.Name] = new LevelInfo
+            {
+                Time = player.Time
+            };
 
-        return JsonSerializer.Deserialize<LevelData>(json) ?? new LevelData();
+            using var w = FileAccess.Open("user://Save/player.AST", FileAccess.ModeFlags.Write);
+            w.StoreString(JsonSerializer.Serialize(data));
+            w.Flush();
+            w.Close();
+        }
+        public static void Update(SaveData Save)
+        {
+            CheckFolder();
+            if (FileAccess.FileExists("user://Save/player.AST"))
+            {
+                using var w = FileAccess.Open("user://Save/player.AST", FileAccess.ModeFlags.Write);
+                w.StoreString(JsonSerializer.Serialize(Save));
+                w.Flush();
+                w.Close();
+            }
+        }
+        public static SaveData Read()
+        {
+            CheckFolder();
+
+            if (!FileAccess.FileExists("user://Save/player.AST"))
+                return new SaveData();
+
+            using var file = FileAccess.Open("user://Save/player.AST", FileAccess.ModeFlags.Read);
+            var json = file.GetAsText();
+            file.Close();
+
+            return JsonSerializer.Deserialize<SaveData>(json) ?? new SaveData();
+        }
     }
 }

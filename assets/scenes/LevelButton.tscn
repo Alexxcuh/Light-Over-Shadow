@@ -1,0 +1,129 @@
+[gd_scene load_steps=10 format=3 uid="uid://celdlqgm3xyh2"]
+
+[ext_resource type="Script" uid="uid://bplwvvekxxg0x" path="res://assets/scripts/LevelButton.cs" id="1_m1h62"]
+[ext_resource type="Texture2D" uid="uid://dfpeqsiy2wyfi" path="res://assets/scenes/Level.png" id="3_o4ltf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u7y45"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_8aat6"]
+font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4jp7k"]
+bg_color = Color(0.12167999, 0.24, 0.1008, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nf3ne"]
+bg_color = Color(0.057799995, 0.17, 0.08958999, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw4oi"]
+bg_color = Color(0.23834999, 0.35, 0.147, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ji2u7"]
+bg_color = Color(0.1292, 0.17, 0.153, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_4jp7k"]
+font_size = 15
+font_color = Color(0.97333336, 1, 0.68, 1)
+
+[node name="Level" type="Panel" node_paths=PackedStringArray("Icon", "_Name", "Play")]
+clip_contents = true
+custom_minimum_size = Vector2(300, 160)
+size_flags_horizontal = 3
+script = ExtResource("1_m1h62")
+Icon = NodePath("Mask/Icon")
+_Name = NodePath("LevelName")
+Play = NodePath("Play")
+
+[node name="Mask" type="Panel" parent="."]
+clip_children = 1
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 285.28
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u7y45")
+
+[node name="Icon" type="TextureRect" parent="Mask"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.036000002
+anchor_top = -0.071
+anchor_right = -0.036000002
+anchor_bottom = -0.071
+offset_left = 7.5500803
+offset_top = 9.940001
+offset_right = 287.5501
+offset_bottom = 149.94
+texture = ExtResource("3_o4ltf")
+
+[node name="LevelName" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 308.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 35.0
+text = "Level Name"
+label_settings = SubResource("LabelSettings_8aat6")
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -276.06403
+offset_top = -52.0
+offset_right = -12.0
+offset_bottom = -10.823532
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_4jp7k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nf3ne")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pw4oi")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ji2u7")
+text = "Play"
+
+[node name="PB" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -692.0
+offset_top = -48.0
+offset_right = -288.0
+offset_bottom = -13.0
+grow_vertical = 2
+text = "PB - 00:00:00"
+label_settings = SubResource("LabelSettings_4jp7k")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="pressed" from="Play" to="." method="pressed"]
