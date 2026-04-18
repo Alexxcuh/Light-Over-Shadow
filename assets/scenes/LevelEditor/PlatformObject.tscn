@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://0nwlk0gapoy1"]
+
+[ext_resource type="Script" uid="uid://xoq7i806u52e" path="res://assets/scripts/LevelEditor/OBJECT_Platform.cs" id="1_lboic"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noarx"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_huo54"]
+material = SubResource("StandardMaterial3D_noarx")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lboic"]
+
+[node name="PlatformObject" type="MeshInstance3D" unique_id=225789071]
+mesh = SubResource("BoxMesh_huo54")
+script = ExtResource("1_lboic")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1989464174]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=282724704]
+shape = SubResource("BoxShape3D_lboic")

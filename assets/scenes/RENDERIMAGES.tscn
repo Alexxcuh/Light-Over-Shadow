@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://bno5ohp7hpy20"]
+
+[ext_resource type="Script" uid="uid://b5ed1lnf3olwo" path="res://assets/scripts/Render.cs" id="1_yvd6g"]
+[ext_resource type="Shader" uid="uid://vea6nysxmwhc" path="res://assets/visuals/basd.gdshader" id="2_otmsm"]
+[ext_resource type="PackedScene" uid="uid://elhlb7eqijrl" path="res://assets/scenes/Finish.tscn" id="3_yvd6g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0gfpk"]
+render_priority = 0
+shader = ExtResource("2_otmsm")
+shader_parameter/edge_color = Color(0.49803922, 0.49803922, 0.49803922, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_yvd6g"]
+material = SubResource("ShaderMaterial_0gfpk")
+
+[node name="Renderimages" type="Node3D" node_paths=PackedStringArray("viewport")]
+script = ExtResource("1_yvd6g")
+viewport = NodePath("SubViewportContainer/SubViewport")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = -1
+anchor_right = 0.44400004
+anchor_bottom = 0.79
+offset_right = 0.5119629
+offset_bottom = 0.07998657
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(0.9238795, -0.14644663, 0.3535534, 0, 0.9238795, 0.38268346, -0.38268346, -0.3535534, 0.85355335, 1, 1, 2.5)
+current = true
+fov = 57.393986
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
+mesh = SubResource("QuadMesh_yvd6g")
+skeleton = NodePath("../../../../../..")
+
+[node name="Button" type="Button" parent="."]
+offset_top = 544.0
+offset_right = 512.0
+offset_bottom = 608.0
+text = "RENDER"
+
+[node name="Checkpoint" parent="." instance=ExtResource("3_yvd6g")]
+FinishLine = false
+
+[connection signal="pressed" from="Button" to="." method="_Render"]

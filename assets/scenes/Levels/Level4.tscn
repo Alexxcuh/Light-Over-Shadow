@@ -1,20 +1,19 @@
-[gd_scene load_steps=49 format=3 uid="uid://dh1u3xsxd8127"]
+[gd_scene load_steps=48 format=3 uid="uid://dh1u3xsxd8127"]
 
-[ext_resource type="Script" uid="uid://ipbggsk3kbdk" path="res://assets/scripts/LevelIdentifier.cs" id="1_aonaf"]
 [ext_resource type="FontFile" uid="uid://dy3e6rotqbl3n" path="res://assets/fonts/ArchivoBlack.ttf" id="1_o3rbb"]
 [ext_resource type="Script" uid="uid://clw5yfm1yhaqx" path="res://assets/scripts/Finish.cs" id="1_vfbhi"]
 [ext_resource type="PackedScene" uid="uid://hw2a4fa17vxc" path="res://assets/scenes/player.tscn" id="2_ax1fw"]
 [ext_resource type="Script" uid="uid://bu64uwf38pccx" path="res://assets/scripts/FadeText.cs" id="2_fd61o"]
 [ext_resource type="Script" uid="uid://4l82yuwlemm5" path="res://assets/scripts/LightPlatform.cs" id="3_05dqw"]
-[ext_resource type="AudioStream" uid="uid://cemwbfsjlkkud" path="res://assets/visuals/place.wav" id="4_ampee"]
-[ext_resource type="AudioStream" uid="uid://dk4gld3l402xh" path="res://assets/visuals/dissapear.wav" id="5_0rse4"]
+[ext_resource type="AudioStream" uid="uid://cemwbfsjlkkud" path="res://assets/Audio/place.wav" id="4_ampee"]
+[ext_resource type="AudioStream" uid="uid://dk4gld3l402xh" path="res://assets/Audio/dissapear.wav" id="5_0rse4"]
 [ext_resource type="Script" uid="uid://c6n844bsdotfr" path="res://assets/scripts/Button3D.cs" id="6_05dqw"]
-[ext_resource type="AudioStream" uid="uid://cxhclnldbgcit" path="res://assets/visuals/click.wav" id="7_ampee"]
+[ext_resource type="AudioStream" uid="uid://cxhclnldbgcit" path="res://assets/Audio/click.wav" id="7_ampee"]
 [ext_resource type="Script" uid="uid://bn8qgxne4de7t" path="res://assets/scripts/Door.cs" id="8_ud6pf"]
 [ext_resource type="Shader" uid="uid://dwgqqebpe751h" path="res://assets/visuals/scroll.gdshader" id="9_o3rbb"]
 [ext_resource type="Texture2D" uid="uid://c2jnb66iy1uh2" path="res://assets/visuals/ff.png" id="10_fd61o"]
-[ext_resource type="AudioStream" uid="uid://qcbd1lphrsij" path="res://assets/visuals/doorenabled.wav" id="11_aonaf"]
-[ext_resource type="AudioStream" uid="uid://cmyrtoej80hwr" path="res://assets/visuals/doordisabled.wav" id="12_6l1o7"]
+[ext_resource type="AudioStream" uid="uid://qcbd1lphrsij" path="res://assets/Audio/doorenabled.wav" id="11_aonaf"]
+[ext_resource type="AudioStream" uid="uid://cmyrtoej80hwr" path="res://assets/Audio/doordisabled.wav" id="12_6l1o7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noarx"]
 shading_mode = 0
@@ -108,6 +107,7 @@ shader_parameter/albedo_tex = ExtResource("10_fd61o")
 shader_parameter/opacity = 1.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_hmimk"]
+material = SubResource("ShaderMaterial_i2s5w")
 size = Vector3(4, 0.5, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_llh77"]
@@ -155,8 +155,6 @@ size = Vector3(3, 0.5, 3)
 size = Vector3(1000, 0.1, 1000)
 
 [node name="Level4" type="Node3D"]
-script = ExtResource("1_aonaf")
-LevelName = "More Tabs Later"
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -13.5, 7.6, 0)
@@ -520,6 +518,9 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_wsg8a")
 debug_color = Color(1, 0, 0, 1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.70710677, -3.090862e-08, 0.70710677, -0.70710677, -3.090862e-08, 0.70710677, 0, -1, -4.371139e-08, 0, 0, 0)
 
 [connection signal="body_entered" from="Checkpoint" to="Checkpoint" method="Collided"]
 [connection signal="body_entered" from="Checkpoint2" to="Checkpoint2" method="Collided"]

@@ -3,27 +3,26 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://hws5wgw8ftdm"
-path.s3tc="res://.godot/imported/sphere.png-1031d7beb671e538c9f0acd03bbfee1c.s3tc.ctex"
+path="res://.godot/imported/sphere.png-1031d7beb671e538c9f0acd03bbfee1c.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/visuals/sphere.png"
-dest_files=["res://.godot/imported/sphere.png-1031d7beb671e538c9f0acd03bbfee1c.s3tc.ctex"]
+dest_files=["res://.godot/imported/sphere.png-1031d7beb671e538c9f0acd03bbfee1c.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
-compress/hdr_compression=1
+compress/hdr_compression=0
 compress/normal_map=0
-compress/channel_pack=0
+compress/channel_pack=1
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0

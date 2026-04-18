@@ -1,0 +1,80 @@
+using System.Collections.Generic;
+using System.Text.Json;
+using Godot;
+using LOSUtils;
+namespace LOSUtils {
+    public static class SaveFile
+    {
+        public static void CheckFolder()
+        {
+            using var dir = DirAccess.Open("user://");
+            if (!dir.DirExists("Save"))
+                dir.MakeDir("Save");
+        }
+
+        public static void Save(Player player)
+        {
+            CheckFolder();
+
+            SaveData data;
+
+            if (FileAccess.FileExists("user://Save/player.AST"))
+            {
+                using var r = FileAccess.Open("user://Save/player.AST", FileAccess.ModeFlags.Read);
+
+                var bytes = r.GetBuffer((long)r.GetLength());
+                var txt = Encryptor.Decrypt(bytes);
+
+                data = JsonSerializer.Deserialize<SaveData>(txt) ?? new SaveData();
+            }
+            else
+            {
+                data = new SaveData();
+            }
+
+            data.Levels ??= new Dictionary<string, LevelInfo>();
+
+            data.Levels[player.RootScene.Name] = new LevelInfo
+            {
+                Time = player.Time
+            };
+
+            using var w = FileAccess.Open("user://Save/player.AST", FileAccess.ModeFlags.Write);
+
+            var json = JsonSerializer.Serialize(data);
+            var encrypted = Encryptor.Encrypt(json);
+
+            w.StoreBuffer(encrypted);
+            w.Flush();
+        }
+        public static void Update(SaveData Save)
+        {
+            CheckFolder();
+            if (FileAccess.FileExists("user://Save/player.AST"))
+            {
+                using var w = FileAccess.Open("user://Save/player.AST", FileAccess.ModeFlags.Write);
+
+                var json = JsonSerializer.Serialize(Save);
+                var encrypted = Encryptor.Encrypt(json);
+
+                w.StoreBuffer(encrypted);
+                w.Flush();
+            }
+        }
+        public static SaveData Read()
+        {
+            CheckFolder();
+
+            if (!FileAccess.FileExists("user://Save/player.AST"))
+                return new SaveData();
+
+            using var file = FileAccess.Open("user://Save/player.AST", FileAccess.ModeFlags.Read);
+
+            var bytes = file.GetBuffer((long)file.GetLength());
+            file.Close();
+            var json = Encryptor.Decrypt(bytes);
+
+            return JsonSerializer.Deserialize<SaveData>(json) ?? new SaveData();
+        }
+    }
+}

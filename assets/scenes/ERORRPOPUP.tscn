@@ -1,0 +1,83 @@
+[gd_scene load_steps=3 format=3 uid="uid://drlyngpdublbh"]
+
+[ext_resource type="Script" uid="uid://caxwvr1risjdo" path="res://assets/scripts/ErrorPOPUP.cs" id="1_6nhrg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flfv2"]
+bg_color = Color(0, 0, 0, 0.5)
+
+[node name="ERROR" type="Panel" node_paths=PackedStringArray("title", "body")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_flfv2")
+script = ExtResource("1_6nhrg")
+title = NodePath("Panel/TITLE")
+body = NodePath("Panel/BODY")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.50200003
+anchor_right = 0.5
+anchor_bottom = 0.50200003
+offset_left = -224.0
+offset_top = -163.29602
+offset_right = 224.0
+offset_bottom = 156.70398
+
+[node name="TITLE" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.094000004
+offset_bottom = -0.08000183
+theme_override_font_sizes/font_size = 10
+text = "TITLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = -0.006
+anchor_right = 1.0
+anchor_bottom = -0.006
+offset_left = -48.0
+offset_top = -0.07999992
+offset_bottom = 31.92
+grow_horizontal = 0
+text = "X"
+flat = true
+
+[node name="BODY" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 30.0
+offset_right = -8.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 15
+theme_override_font_sizes/bold_font_size = 15
+theme_override_font_sizes/bold_italics_font_size = 15
+theme_override_font_sizes/italics_font_size = 15
+theme_override_font_sizes/mono_font_size = 15
+bbcode_enabled = true
+text = "[center]BODY[/center]"
+
+[node name="Button2" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 278.0
+offset_right = 440.0
+offset_bottom = 309.0
+theme_type_variation = &"InverseButton"
+text = "Okay!"
+
+[connection signal="pressed" from="Panel/Button" to="." method="Pressed"]
+[connection signal="pressed" from="Panel/Button2" to="." method="Pressed"]

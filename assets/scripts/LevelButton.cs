@@ -1,5 +1,4 @@
 using Godot;
-using LOSUtils;
 
 public partial class LevelButton : Panel
 {
@@ -8,15 +7,29 @@ public partial class LevelButton : Panel
     [Export] Label _Name;
     [Export] Button Play;
     [ExportGroup("Level")]
-    [Export] PackedScene AssociatedLevel;
+    [Export] public PackedScene AssociatedLevel;
     [Export] CompressedTexture2D LevelIcon;
+    [Export] public string LevelName;
+    [ExportSubgroup("Community")]
+    [Export] public bool CommunityLevel;
+    [Export] public string LevelHandle;
     public override void _Ready()
     {
+        _Name.Text = LevelName;
         if (LevelIcon != null) Icon.Texture = LevelIcon;
-        _Name.Text = Loader.GetLevelNameFromScene(AssociatedLevel);
     }
     public void pressed()
     {
-        GetTree().ChangeSceneToPacked(AssociatedLevel);
+        if (!CommunityLevel) {
+            GetTree().ChangeSceneToPacked(AssociatedLevel);
+        } else
+        {
+            CommunityLevelPlayer CLP = (CommunityLevelPlayer)AssociatedLevel.Instantiate();
+            CLP.LevelHandle = LevelHandle;
+            GetTree().Root.AddChild(CLP);
+            Node2D cur = (Node2D)GetTree().CurrentScene;
+            GetTree().CurrentScene = CLP;
+            cur.QueueFree();
+        }
     }
 }

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://si5ae1cdebn6"]
+
+[ext_resource type="Script" uid="uid://xoq7i806u52e" path="res://assets/scripts/LE/OBJECT_Platform.cs" id="1_fot3d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noarx"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i8pwi"]
+material = SubResource("StandardMaterial3D_noarx")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tsbh4"]
+
+[node name="StaticBody3D" type="StaticBody3D" unique_id=2062649366]
+script = ExtResource("1_fot3d")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1557097550]
+mesh = SubResource("BoxMesh_i8pwi")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=125034164]
+shape = SubResource("BoxShape3D_tsbh4")

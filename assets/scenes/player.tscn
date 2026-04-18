@@ -1,8 +1,8 @@
 [gd_scene load_steps=17 format=3 uid="uid://hw2a4fa17vxc"]
 
 [ext_resource type="Script" uid="uid://ym12001vrsy2" path="res://assets/scripts/Player.cs" id="1_8sknh"]
-[ext_resource type="AudioStream" uid="uid://cf8tg8p5h137e" path="res://assets/visuals/jump.wav" id="2_0gfpk"]
-[ext_resource type="AudioStream" uid="uid://bweidx4ugrhlr" path="res://assets/visuals/crouch.wav" id="3_0hrit"]
+[ext_resource type="AudioStream" uid="uid://cf8tg8p5h137e" path="res://assets/Audio/jump.wav" id="2_0gfpk"]
+[ext_resource type="AudioStream" uid="uid://bweidx4ugrhlr" path="res://assets/Audio/crouch.wav" id="3_0hrit"]
 [ext_resource type="Shader" uid="uid://vea6nysxmwhc" path="res://assets/visuals/basd.gdshader" id="4_o5c66"]
 [ext_resource type="Texture2D" uid="uid://b0j4oqc7l08s" path="res://assets/visuals/circle.png" id="5_tc801"]
 [ext_resource type="Theme" uid="uid://ba5dhns3igvhd" path="res://assets/visuals/Theme.tres" id="6_0gfpk"]
@@ -49,7 +49,7 @@ corner_radius_bottom_left = 15
 [sub_resource type="LabelSettings" id="LabelSettings_0hrit"]
 font_size = 30
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "xBone", "yBone", "Collision", "HeadBonk", "PlaceSomewhere", "light", "TimeLabel", "SFX", "PauseMenu", "Next", "DemoSave", "contr", "NormalMenu", "TickTimer")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "xBone", "yBone", "Collision", "HeadBonk", "PlaceSomewhere", "light", "TimeLabel", "SFX", "PauseMenu", "Next", "DemoSave", "contr", "NormalMenu")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 script = ExtResource("1_8sknh")
 camera = NodePath("x/y/Camera3D")
@@ -68,7 +68,6 @@ Next = NodePath("x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxConta
 DemoSave = NodePath("x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu/VBoxContainer/SaveDemo")
 contr = NodePath("x/y/Camera3D/CanvasLayer/Control/PauseMenu/Controls")
 NormalMenu = NodePath("x/y/Camera3D/CanvasLayer/Control/PauseMenu/NormalMenu")
-TickTimer = NodePath("Tick")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_a0tk4")

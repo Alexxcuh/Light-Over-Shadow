@@ -38,21 +38,22 @@ public partial class Player : CharacterBody3D
     private PackedScene mmnu;
     [Export] private Control contr;
     [Export] private Control NormalMenu;
-    [Export] private Timer TickTimer;
     [Export] private LightPlatform Platform;
     public Godot.Collections.Array<Vector3> Positions = [];
     public float[] Times = [];
     public Godot.Collections.Array<Vector4> PlatformTicks = [];
     public bool paused = false;
     public Discord DRPC;
+    private SaveData Save;
+    public float SENSITIVITY = 3f;
     public override void _Input(InputEvent @event)
     {
         if (@event is InputEventMouseMotion mouse && !paused && enabled)
         {
             Input.MouseMode = Input.MouseModeEnum.Captured;
             Vector3 rotdg = yBone.RotationDegrees;
-            rotdg -= new Vector3(mouse.Relative.Y * 0.3f, 0, 0);
-            xBone.RotationDegrees -= new Vector3(0, mouse.Relative.X * 0.3f, 0);
+            rotdg -= new Vector3(mouse.Relative.Y * (SENSITIVITY/10), 0, 0);
+            xBone.RotationDegrees -= new Vector3(0, mouse.Relative.X * (SENSITIVITY/10), 0);
             rotdg.X = Mathf.Clamp(rotdg.X, -90, 90);
             yBone.RotationDegrees = rotdg;
         }
@@ -66,6 +67,8 @@ public partial class Player : CharacterBody3D
         SpawnPoint = Position;
         StartPoint = SpawnPoint;
         lightstuff = StartPlatforms;
+        Save = SaveFile.Read();
+        SENSITIVITY = (float)Save.Settings.MouseSens;
         if (NextLevel == null) Next.Visible = false;
     }
     public void NextLvl()
@@ -95,9 +98,9 @@ public partial class Player : CharacterBody3D
             if (end)
             {
                 DemoSave.Visible = true;
-                LevelData SaveData = SaveFile.Read();
+                SaveData SaveData = SaveFile.Read();
                 PauseMenu.GetNode<Control>("NormalMenu").GetNode<RichTextLabel>("Text").Text = $"Level Finished!\n[font_size=25][color=#ff6]{TimeLabel.Text}[/color]";
-                if (SaveData.Levels.GetValueOrDefault(RootScene.Name) != null && SaveData != new LevelData{}){
+                if (SaveData.Levels.GetValueOrDefault(RootScene.Name) != null && SaveData != new SaveData{}){
                     float TimeSave = SaveData.Levels[RootScene.Name].Time;
                     PauseMenu.GetNode<Control>("NormalMenu").GetNode<RichTextLabel>("Text").Text += $"\nPB: [color=#6f6]{(int)(TimeSave / 60 % 60):00}:{(int)(TimeSave % 60):00}.{(int)(TimeSave * 100 % 100):00}[/color]";
                 }
@@ -152,18 +155,34 @@ public partial class Player : CharacterBody3D
     }
     int ticks = 0;
     int b = 0;
+    bool start = true;
     bool recording = false;
     public void Tick()
     {
         if (!enabled) return;
-        TickTimer.Start();
+        start = true;
         Positions.Add(new Vector3(Position.X,Position.Y,Position.Z));
         Times = [.. Times, Time];
         b=0;
         ticks++;
         b++;
     }
+    float totaltime = 0f;
+    float countdown = 0.033f;
     bool justincase = false;
+    //TIMER SHIT
+    public override void _Process(double delta)
+    {
+        if (start) {
+            totaltime += (float)delta;
+            if (totaltime >= countdown)
+            {
+                totaltime = 0;
+                start = false;
+                Tick();
+            }
+        }
+    }
     public override void _PhysicsProcess(double delta)
     {
         if (!enabled) {
@@ -171,7 +190,7 @@ public partial class Player : CharacterBody3D
             {
                 xBone.QueueFree();
                 Collision.QueueFree();
-                TickTimer.QueueFree();
+                start = false;
                 justincase = true;
             }
             return;
@@ -275,7 +294,6 @@ public partial class Player : CharacterBody3D
                 LightPlatformVis.Visible = false;
                 Engine.TimeScale = 1f;
             }
-            ;
             Vector2 inputDir = Input.GetVector("A", "D", "W", "S");
             Vector3 forwardDir = xBone.GlobalTransform.Basis.Z;
             forwardDir = forwardDir.Normalized();

@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://b88qlu75mtm2k"]
+
+[ext_resource type="Script" uid="uid://dq2o5s68ljnec" path="res://assets/scripts/CommunityLevelPlayer.cs" id="1_5tx6j"]
+[ext_resource type="PackedScene" uid="uid://hw2a4fa17vxc" path="res://assets/scenes/player.tscn" id="2_3spqn"]
+[ext_resource type="PackedScene" uid="uid://elhlb7eqijrl" path="res://assets/scenes/Finish.tscn" id="2_l1gf0"]
+[ext_resource type="PackedScene" uid="uid://si5ae1cdebn6" path="res://assets/scenes/Platform.tscn" id="3_k0gho"]
+[ext_resource type="Script" uid="uid://4l82yuwlemm5" path="res://assets/scripts/LightPlatform.cs" id="3_l1gf0"]
+[ext_resource type="AudioStream" uid="uid://cemwbfsjlkkud" path="res://assets/Audio/place.wav" id="4_k0gho"]
+[ext_resource type="AudioStream" uid="uid://dk4gld3l402xh" path="res://assets/Audio/dissapear.wav" id="5_w6nji"]
+
+[sub_resource type="Environment" id="Environment_bvxot"]
+background_mode = 1
+background_color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0tk4"]
+transparency = 1
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(1, 1, 1, 0.12156863)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i3dh0"]
+material = SubResource("StandardMaterial3D_a0tk4")
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uolpc"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_31ged"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dwiow"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wsg8a"]
+size = Vector3(1000, 0.1, 1000)
+
+[node name="COM_TEST" type="Node3D" unique_id=2033496428 node_paths=PackedStringArray("player", "LevelGroup")]
+script = ExtResource("1_5tx6j")
+player = NodePath("Player")
+LevelGroup = NodePath("Level")
+PlatformScene = ExtResource("3_k0gho")
+CheckpointScene = ExtResource("2_l1gf0")
+
+[node name="DO NOT REMOVE BELOW" type="WorldEnvironment" parent="." unique_id=1533778751]
+environment = SubResource("Environment_bvxot")
+
+[node name="Coyote" type="Timer" parent="." unique_id=154270852]
+wait_time = 0.35
+one_shot = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=508032788]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10000, 0)
+visible = false
+mesh = SubResource("BoxMesh_i3dh0")
+
+[node name="Player" parent="." unique_id=1467142821 node_paths=PackedStringArray("Coyote", "LightPlatformVis", "LightPlatform", "RootScene") instance=ExtResource("2_3spqn")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.8, 0)
+Coyote = NodePath("../Coyote")
+LightPlatformVis = NodePath("../MeshInstance3D")
+LightPlatform = NodePath("../LightPlatform")
+RootScene = NodePath("..")
+
+[node name="LightPlatform" type="StaticBody3D" parent="." unique_id=421259645 node_paths=PackedStringArray("mesh", "SFX")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10000, 0)
+visible = false
+script = ExtResource("3_l1gf0")
+LifeTime = 5.0
+mat = SubResource("StandardMaterial3D_uolpc")
+mesh = NodePath("MeshInstance3D2")
+SFX = NodePath("SFX")
+Place = ExtResource("4_k0gho")
+Dissapear = ExtResource("5_w6nji")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="LightPlatform" unique_id=1713308174]
+mesh = SubResource("BoxMesh_31ged")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LightPlatform" unique_id=1124663552]
+shape = SubResource("BoxShape3D_dwiow")
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="LightPlatform" unique_id=1105372098]
+stream = ExtResource("4_k0gho")
+
+[node name="Floor" type="Area3D" parent="." unique_id=1888275428]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=338877686]
+shape = SubResource("BoxShape3D_wsg8a")
+debug_color = Color(1, 0, 0, 1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=405535626]
+transform = Transform3D(0.70710677, -3.090862e-08, 0.70710677, -0.70710677, -3.090862e-08, 0.70710677, 0, -1, -4.371139e-08, 0, 0, 0)
+
+[node name="Level" type="Node3D" parent="." unique_id=117761706]
+
+[node name="Objects" type="Node3D" parent="Level" unique_id=1389103718]
+
+[connection signal="finished" from="LightPlatform/SFX" to="LightPlatform" method="finish"]
